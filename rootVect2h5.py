@@ -57,11 +57,26 @@ len_of_lt = len(life_time)
 pars = argparse.ArgumentParser()
 pars.add_argument('--ht',action='store',type=int,help='specify HT of the QCD file')
 pars.add_argument('-s'  ,action='store',type=int,help='specify if for VBF file')
+pars.add_argument('-m'  ,action='store',type=str,help='specify model')
+pars.add_argument('-t'  ,action='store',type=int,help='specify if to do test')
 args = pars.parse_args()
 if args.ht:
     HT = str( args.ht ) 
 if args.s:
     ct_dep = args.s
+if args.t:
+    testOn = 1
+
+if   args.m == 'bdt':
+    lola_on    = 0
+elif args.m == 'lola5':
+    lola_on    = 1
+    NumOfVecEl = 5
+elif args.m == 'lola6':
+    lola_on    = 1
+    NumOfVecEl = 6
+
+    
 
 
 if   ct_dep == 0:
@@ -278,6 +293,8 @@ def skim_c( name , newFileName ):
             if testOn == 0:
                 numOfEntriesToScan_local = oldTree.GetEntriesFast()
     # this attribute list must exactly match (the order of) the features in the header file!!!! 
+    
+
 
     ti = 80000
     #theweight = oldTree.GetWeight() 
@@ -294,505 +311,50 @@ def skim_c( name , newFileName ):
             #if cut_on == 0:
             #    condition_str_dict[j+1] = '1'
             #if eval( condition_str_dict[j+1] ):
-            if 1:    
+            if 1:  
+  
                 if lola_on == 0:        
+
                     for k in xrange( oldTree.Jets.size() ):
                         #print oldTree.Jets.size() 
                         if k == 1:
                             if cut_on == 0:
                                 condition_str_dict[j+1] = '1'
                             if eval( condition_str_dict[j+1] ):
-                                Jets1.pt             = oldTree.Jets[k].pt
-                                Jets1.eta            = oldTree.Jets[k].eta
-                                Jets1.phi            = oldTree.Jets[k].phi
-                                Jets1.mass           = oldTree.Jets[k].mass
-                                Jets1.energy         = oldTree.Jets[k].energy
-
-                                Jets1.cHadE          = oldTree.Jets[k].cHadE
-                                Jets1.nHadE          = oldTree.Jets[k].nHadE
-                                Jets1.cHadEFrac      = oldTree.Jets[k].cHadEFrac
-                                Jets1.nHadEFrac      = oldTree.Jets[k].nHadEFrac
-                                Jets1.nEmE           = oldTree.Jets[k].nEmE
-                                Jets1.nEmEFrac       = oldTree.Jets[k].nEmEFrac
-                                Jets1.cEmE           = oldTree.Jets[k].cEmE     
-                                Jets1.cEmEFrac       = oldTree.Jets[k].cEmEFrac                    
-                                Jets1.cmuE           = oldTree.Jets[k].cmuE
-                                Jets1.cmuEFrac       = oldTree.Jets[k].cmuEFrac
-                                Jets1.muE            = oldTree.Jets[k].muE     
-                                Jets1.muEFrac        = oldTree.Jets[k].muEFrac
-                                Jets1.eleE           = oldTree.Jets[k].eleE
-                                Jets1.eleEFrac       = oldTree.Jets[k].eleEFrac
-                                Jets1.eleMulti       = oldTree.Jets[k].eleMulti  
-                                Jets1.photonE        = oldTree.Jets[k].photonE                   
-                                Jets1.photonEFrac    = oldTree.Jets[k].photonEFrac
-                                Jets1.photonMulti    = oldTree.Jets[k].photonMulti     
-                                Jets1.cHadMulti      = oldTree.Jets[k].cHadMulti
-                                Jets1.npr            = oldTree.Jets[k].npr
-                                Jets1.cMulti         = oldTree.Jets[k].cMulti
-                                Jets1.nMulti         = oldTree.Jets[k].nMulti
-
-                                fraccal = oldTree.Jets[k].FracCal  
-                                if fraccal <= 0:
+                                attr = forBDT.preList + forBDT.attrList
+                                for stri in attr:
+                                    setattr( Jets1 , stri , getattr(oldTree.Jets[k],stri) ) 
+  
+                                if   Jets1.FracCal <=  0:
                                     Jets1.FracCal    = 0.
-                                elif fraccal > 400:
-                                    Jets1.FracCal    = 400.
-                                else:
-                                    Jets1.FracCal    = fraccal
-    
+                                elif Jets1.FracCal > 400:
+                                    Jets1.FracCal    = 400.    
                         else: pass    
                         
                     
-                    
                 elif lola_on == 1:
+
                     if NumOfVecEl == 5:
-                        Jets1.pfc1_energy    = jet1['E_1'][i]
-                        Jets1.pfc1_energy    = jet1['E_1'][i]
-                        Jets1.pfc1_px        = jet1['PX_1'][i]
-                        Jets1.pfc1_py        = jet1['PY_1'][i]
-                        Jets1.pfc1_pz        = jet1['PZ_1'][i]
-                        Jets1.pfc1_ifTrack   = jet1['C_1'][i]
-                        Jets1.pfc2_energy    = jet1['E_2'][i]
-                        Jets1.pfc2_px        = jet1['PX_2'][i]
-                        Jets1.pfc2_py        = jet1['PY_2'][i]
-                        Jets1.pfc2_pz        = jet1['PZ_2'][i]
-                        Jets1.pfc2_ifTrack   = jet1['C_2'][i]
-                        Jets1.pfc3_energy    = jet1['E_3'][i]
-                        Jets1.pfc3_px        = jet1['PX_3'][i]
-                        Jets1.pfc3_py        = jet1['PY_3'][i]
-                        Jets1.pfc3_pz        = jet1['PZ_3'][i]
-                        Jets1.pfc3_ifTrack   = jet1['C_3'][i]
-                        Jets1.pfc4_energy    = jet1['E_4'][i]
-                        Jets1.pfc4_px        = jet1['PX_4'][i]
-                        Jets1.pfc4_py        = jet1['PY_4'][i]
-                        Jets1.pfc4_pz        = jet1['PZ_4'][i]
-                        Jets1.pfc4_ifTrack   = jet1['C_4'][i]
-                        Jets1.pfc5_energy    = jet1['E_5'][i]
-                        Jets1.pfc5_px        = jet1['PX_5'][i]
-                        Jets1.pfc5_py        = jet1['PY_5'][i]
-                        Jets1.pfc5_pz        = jet1['PZ_5'][i]
-                        Jets1.pfc5_ifTrack   = jet1['C_5'][i]
-                        Jets1.pfc6_energy    = jet1['E_6'][i]
-                        Jets1.pfc6_px        = jet1['PX_6'][i]
-                        Jets1.pfc6_py        = jet1['PY_6'][i]
-                        Jets1.pfc6_pz        = jet1['PZ_6'][i]
-                        Jets1.pfc6_ifTrack   = jet1['C_6'][i]
-                        Jets1.pfc7_energy    = jet1['E_7'][i]
-                        Jets1.pfc7_px        = jet1['PX_7'][i]
-                        Jets1.pfc7_py        = jet1['PY_7'][i]
-                        Jets1.pfc7_pz        = jet1['PZ_7'][i]
-                        Jets1.pfc7_ifTrack   = jet1['C_7'][i]
-                        Jets1.pfc8_energy    = jet1['E_8'][i]
-                        Jets1.pfc8_px        = jet1['PX_8'][i]
-                        Jets1.pfc8_py        = jet1['PY_8'][i]
-                        Jets1.pfc8_pz        = jet1['PZ_8'][i]
-                        Jets1.pfc8_ifTrack   = jet1['C_8'][i]
-                        Jets1.pfc9_energy    = jet1['E_9'][i]
-                        Jets1.pfc9_px        = jet1['PX_9'][i]
-                        Jets1.pfc9_py        = jet1['PY_9'][i]
-                        Jets1.pfc9_pz        = jet1['PZ_9'][i]
-                        Jets1.pfc9_ifTrack   = jet1['C_9'][i]
-                        Jets1.pfc10_energy    = jet1['E_10'][i]
-                        Jets1.pfc10_px        = jet1['PX_10'][i]
-                        Jets1.pfc10_py        = jet1['PY_10'][i]
-                        Jets1.pfc10_pz        = jet1['PZ_10'][i]
-                        Jets1.pfc10_ifTrack   = jet1['C_10'][i]
-                        Jets1.pfc11_energy    = jet1['E_11'][i]
-                        Jets1.pfc11_px        = jet1['PX_11'][i]
-                        Jets1.pfc11_py        = jet1['PY_11'][i]
-                        Jets1.pfc11_pz        = jet1['PZ_11'][i]
-                        Jets1.pfc11_ifTrack   = jet1['C_11'][i]
-                        Jets1.pfc12_energy    = jet1['E_12'][i]
-                        Jets1.pfc12_px        = jet1['PX_12'][i]
-                        Jets1.pfc12_py        = jet1['PY_12'][i]
-                        Jets1.pfc12_pz        = jet1['PZ_12'][i]
-                        Jets1.pfc12_ifTrack   = jet1['C_12'][i]
-                        Jets1.pfc13_energy    = jet1['E_13'][i]
-                        Jets1.pfc13_px        = jet1['PX_13'][i]
-                        Jets1.pfc13_py        = jet1['PY_13'][i]
-                        Jets1.pfc13_pz        = jet1['PZ_13'][i]
-                        Jets1.pfc13_ifTrack   = jet1['C_13'][i]
-                        Jets1.pfc14_energy    = jet1['E_14'][i]
-                        Jets1.pfc14_px        = jet1['PX_14'][i]
-                        Jets1.pfc14_py        = jet1['PY_14'][i]
-                        Jets1.pfc14_pz        = jet1['PZ_14'][i]
-                        Jets1.pfc14_ifTrack   = jet1['C_14'][i]
-                        Jets1.pfc15_energy    = jet1['E_15'][i]
-                        Jets1.pfc15_px        = jet1['PX_15'][i]
-                        Jets1.pfc15_py        = jet1['PY_15'][i]
-                        Jets1.pfc15_pz        = jet1['PZ_15'][i]
-                        Jets1.pfc15_ifTrack   = jet1['C_15'][i]
-                        Jets1.pfc16_energy    = jet1['E_16'][i]
-                        Jets1.pfc16_px        = jet1['PX_16'][i]
-                        Jets1.pfc16_py        = jet1['PY_16'][i]
-                        Jets1.pfc16_pz        = jet1['PZ_16'][i]
-                        Jets1.pfc16_ifTrack   = jet1['C_16'][i]
-                        Jets1.pfc17_energy    = jet1['E_17'][i]
-                        Jets1.pfc17_px        = jet1['PX_17'][i]
-                        Jets1.pfc17_py        = jet1['PY_17'][i]
-                        Jets1.pfc17_pz        = jet1['PZ_17'][i]
-                        Jets1.pfc17_ifTrack   = jet1['C_17'][i]
-                        Jets1.pfc18_energy    = jet1['E_18'][i]
-                        Jets1.pfc18_px        = jet1['PX_18'][i]
-                        Jets1.pfc18_py        = jet1['PY_18'][i]
-                        Jets1.pfc18_pz        = jet1['PZ_18'][i]
-                        Jets1.pfc18_ifTrack   = jet1['C_18'][i]
-                        Jets1.pfc19_energy    = jet1['E_19'][i]
-                        Jets1.pfc19_px        = jet1['PX_19'][i]
-                        Jets1.pfc19_py        = jet1['PY_19'][i]
-                        Jets1.pfc19_pz        = jet1['PZ_19'][i]
-                        Jets1.pfc19_ifTrack   = jet1['C_19'][i]
-                        Jets1.pfc20_energy    = jet1['E_20'][i]
-                        Jets1.pfc20_px        = jet1['PX_20'][i]
-                        Jets1.pfc20_py        = jet1['PY_20'][i]
-                        Jets1.pfc20_pz        = jet1['PZ_20'][i]
-                        Jets1.pfc20_ifTrack   = jet1['C_20'][i]
-                        Jets1.pfc21_energy    = jet1['E_21'][i]
-                        Jets1.pfc21_px        = jet1['PX_21'][i]
-                        Jets1.pfc21_py        = jet1['PY_21'][i]
-                        Jets1.pfc21_pz        = jet1['PZ_21'][i]
-                        Jets1.pfc21_ifTrack   = jet1['C_21'][i]
-                        Jets1.pfc22_energy    = jet1['E_22'][i]
-                        Jets1.pfc22_px        = jet1['PX_22'][i]
-                        Jets1.pfc22_py        = jet1['PY_22'][i]
-                        Jets1.pfc22_pz        = jet1['PZ_22'][i]
-                        Jets1.pfc22_ifTrack   = jet1['C_22'][i]
-                        Jets1.pfc23_energy    = jet1['E_23'][i]
-                        Jets1.pfc23_px        = jet1['PX_23'][i]
-                        Jets1.pfc23_py        = jet1['PY_23'][i]
-                        Jets1.pfc23_pz        = jet1['PZ_23'][i]
-                        Jets1.pfc23_ifTrack   = jet1['C_23'][i]
-                        Jets1.pfc24_energy    = jet1['E_24'][i]
-                        Jets1.pfc24_px        = jet1['PX_24'][i]
-                        Jets1.pfc24_py        = jet1['PY_24'][i]
-                        Jets1.pfc24_pz        = jet1['PZ_24'][i]
-                        Jets1.pfc24_ifTrack   = jet1['C_24'][i]
-                        Jets1.pfc25_energy    = jet1['E_25'][i]
-                        Jets1.pfc25_px        = jet1['PX_25'][i]
-                        Jets1.pfc25_py        = jet1['PY_25'][i]
-                        Jets1.pfc25_pz        = jet1['PZ_25'][i]
-                        Jets1.pfc25_ifTrack   = jet1['C_25'][i]
-                        Jets1.pfc26_energy    = jet1['E_26'][i]
-                        Jets1.pfc26_px        = jet1['PX_26'][i]
-                        Jets1.pfc26_py        = jet1['PY_26'][i]
-                        Jets1.pfc26_pz        = jet1['PZ_26'][i]
-                        Jets1.pfc26_ifTrack   = jet1['C_26'][i]
-                        Jets1.pfc27_energy    = jet1['E_27'][i]
-                        Jets1.pfc27_px        = jet1['PX_27'][i]
-                        Jets1.pfc27_py        = jet1['PY_27'][i]
-                        Jets1.pfc27_pz        = jet1['PZ_27'][i]
-                        Jets1.pfc27_ifTrack   = jet1['C_27'][i]
-                        Jets1.pfc28_energy    = jet1['E_28'][i]
-                        Jets1.pfc28_px        = jet1['PX_28'][i]
-                        Jets1.pfc28_py        = jet1['PY_28'][i]
-                        Jets1.pfc28_pz        = jet1['PZ_28'][i]
-                        Jets1.pfc28_ifTrack   = jet1['C_28'][i]
-                        Jets1.pfc29_energy    = jet1['E_29'][i]
-                        Jets1.pfc29_px        = jet1['PX_29'][i]
-                        Jets1.pfc29_py        = jet1['PY_29'][i]
-                        Jets1.pfc29_pz        = jet1['PZ_29'][i]
-                        Jets1.pfc29_ifTrack   = jet1['C_29'][i]
-                        Jets1.pfc30_energy    = jet1['E_30'][i]
-                        Jets1.pfc30_px        = jet1['PX_30'][i]
-                        Jets1.pfc30_py        = jet1['PY_30'][i]
-                        Jets1.pfc30_pz        = jet1['PZ_30'][i]
-                        Jets1.pfc30_ifTrack   = jet1['C_30'][i]
-                        Jets1.pfc31_energy    = jet1['E_31'][i]
-                        Jets1.pfc31_px        = jet1['PX_31'][i]
-                        Jets1.pfc31_py        = jet1['PY_31'][i]
-                        Jets1.pfc31_pz        = jet1['PZ_31'][i]
-                        Jets1.pfc31_ifTrack   = jet1['C_31'][i]
-                        Jets1.pfc32_energy    = jet1['E_32'][i]
-                        Jets1.pfc32_px        = jet1['PX_32'][i]
-                        Jets1.pfc32_py        = jet1['PY_32'][i]
-                        Jets1.pfc32_pz        = jet1['PZ_32'][i]
-                        Jets1.pfc32_ifTrack   = jet1['C_32'][i]
-                        Jets1.pfc33_energy    = jet1['E_33'][i]
-                        Jets1.pfc33_px        = jet1['PX_33'][i]
-                        Jets1.pfc33_py        = jet1['PY_33'][i]
-                        Jets1.pfc33_pz        = jet1['PZ_33'][i]
-                        Jets1.pfc33_ifTrack   = jet1['C_33'][i]
-                        Jets1.pfc34_energy    = jet1['E_34'][i]
-                        Jets1.pfc34_px        = jet1['PX_34'][i]
-                        Jets1.pfc34_py        = jet1['PY_34'][i]
-                        Jets1.pfc34_pz        = jet1['PZ_34'][i]
-                        Jets1.pfc34_ifTrack   = jet1['C_34'][i]
-                        Jets1.pfc35_energy    = jet1['E_35'][i]
-                        Jets1.pfc35_px        = jet1['PX_35'][i]
-                        Jets1.pfc35_py        = jet1['PY_35'][i]
-                        Jets1.pfc35_pz        = jet1['PZ_35'][i]
-                        Jets1.pfc35_ifTrack   = jet1['C_35'][i]
-                        Jets1.pfc36_energy    = jet1['E_36'][i]
-                        Jets1.pfc36_px        = jet1['PX_36'][i]
-                        Jets1.pfc36_py        = jet1['PY_36'][i]
-                        Jets1.pfc36_pz        = jet1['PZ_36'][i]
-                        Jets1.pfc36_ifTrack   = jet1['C_36'][i]
-                        Jets1.pfc37_energy    = jet1['E_37'][i]
-                        Jets1.pfc37_px        = jet1['PX_37'][i]
-                        Jets1.pfc37_py        = jet1['PY_37'][i]
-                        Jets1.pfc37_pz        = jet1['PZ_37'][i]
-                        Jets1.pfc37_ifTrack   = jet1['C_37'][i]
-                        Jets1.pfc38_energy    = jet1['E_38'][i]
-                        Jets1.pfc38_px        = jet1['PX_38'][i]
-                        Jets1.pfc38_py        = jet1['PY_38'][i]
-                        Jets1.pfc38_pz        = jet1['PZ_38'][i]
-                        Jets1.pfc38_ifTrack   = jet1['C_38'][i]
-                        Jets1.pfc39_energy    = jet1['E_39'][i]
-                        Jets1.pfc39_px        = jet1['PX_39'][i]
-                        Jets1.pfc39_py        = jet1['PY_39'][i]
-                        Jets1.pfc39_pz        = jet1['PZ_39'][i]
-                        Jets1.pfc39_ifTrack   = jet1['C_39'][i]
-                        Jets1.pfc40_energy    = jet1['E_40'][i]
-                        Jets1.pfc40_px        = jet1['PX_40'][i]
-                        Jets1.pfc40_py        = jet1['PY_40'][i]
-                        Jets1.pfc40_pz        = jet1['PZ_40'][i]
-                        Jets1.pfc40_ifTrack   = jet1['C_40'][i]
+                        attr_out = forLolaFive.attrTypeList
+                        for ii in range(forLolaFive.nConstit):
+                            for strO in attr_out:
+                                tempAttrStrO = 'pfc' + str(ii+1) + '_' + strO
+                                tempAttrStrI =  forLolaFive.attrNameDic[strO] + '_' + str(ii+1)
+                                setattr( Jets1 , tempAttrStrO , jet1[tempAttrStrI][i] )
+
                     elif NumOfVecEl == 6:
-                        Jets1.pfc1_energy    = jet1['E_1'][i]
-                        Jets1.pfc1_px        = jet1['PX_1'][i]
-                        Jets1.pfc1_py        = jet1['PY_1'][i]
-                        Jets1.pfc1_pz        = jet1['PZ_1'][i]
-                        Jets1.pfc1_ifTrack   = jet1['C_1'][i]
-                        Jets1.pfc1_pType     = jet1['PID_1'][i]
-                        Jets1.pfc2_energy    = jet1['E_2'][i]
-                        Jets1.pfc2_px        = jet1['PX_2'][i]
-                        Jets1.pfc2_py        = jet1['PY_2'][i]
-                        Jets1.pfc2_pz        = jet1['PZ_2'][i]
-                        Jets1.pfc2_ifTrack   = jet1['C_2'][i]
-                        Jets1.pfc2_pType     = jet1['PID_2'][i]
-                        Jets1.pfc3_energy    = jet1['E_3'][i]
-                        Jets1.pfc3_px        = jet1['PX_3'][i]
-                        Jets1.pfc3_py        = jet1['PY_3'][i]
-                        Jets1.pfc3_pz        = jet1['PZ_3'][i]
-                        Jets1.pfc3_ifTrack   = jet1['C_3'][i]
-                        Jets1.pfc3_pType     = jet1['PID_3'][i]
-                        Jets1.pfc4_energy    = jet1['E_4'][i]
-                        Jets1.pfc4_px        = jet1['PX_4'][i]
-                        Jets1.pfc4_py        = jet1['PY_4'][i]
-                        Jets1.pfc4_pz        = jet1['PZ_4'][i]
-                        Jets1.pfc4_ifTrack   = jet1['C_4'][i]
-                        Jets1.pfc4_pType     = jet1['PID_4'][i]
-                        Jets1.pfc5_energy    = jet1['E_5'][i]
-                        Jets1.pfc5_px        = jet1['PX_5'][i]
-                        Jets1.pfc5_py        = jet1['PY_5'][i]
-                        Jets1.pfc5_pz        = jet1['PZ_5'][i]
-                        Jets1.pfc5_ifTrack   = jet1['C_5'][i]
-                        Jets1.pfc5_pType     = jet1['PID_5'][i]
-                        Jets1.pfc6_energy    = jet1['E_6'][i]
-                        Jets1.pfc6_px        = jet1['PX_6'][i]
-                        Jets1.pfc6_py        = jet1['PY_6'][i]
-                        Jets1.pfc6_pz        = jet1['PZ_6'][i]
-                        Jets1.pfc6_ifTrack   = jet1['C_6'][i]
-                        Jets1.pfc6_pType     = jet1['PID_6'][i]
-                        Jets1.pfc7_energy    = jet1['E_7'][i]
-                        Jets1.pfc7_px        = jet1['PX_7'][i]
-                        Jets1.pfc7_py        = jet1['PY_7'][i]
-                        Jets1.pfc7_pz        = jet1['PZ_7'][i]
-                        Jets1.pfc7_ifTrack   = jet1['C_7'][i]
-                        Jets1.pfc7_pType     = jet1['PID_7'][i]
-                        Jets1.pfc8_energy    = jet1['E_8'][i]
-                        Jets1.pfc8_px        = jet1['PX_8'][i]
-                        Jets1.pfc8_py        = jet1['PY_8'][i]
-                        Jets1.pfc8_pz        = jet1['PZ_8'][i]
-                        Jets1.pfc8_ifTrack   = jet1['C_8'][i]
-                        Jets1.pfc8_pType     = jet1['PID_8'][i]
-                        Jets1.pfc9_energy    = jet1['E_9'][i]
-                        Jets1.pfc9_px        = jet1['PX_9'][i]
-                        Jets1.pfc9_py        = jet1['PY_9'][i]
-                        Jets1.pfc9_pz        = jet1['PZ_9'][i]
-                        Jets1.pfc9_ifTrack   = jet1['C_9'][i]
-                        Jets1.pfc9_pType     = jet1['PID_9'][i]
-                        Jets1.pfc10_energy    = jet1['E_10'][i]
-                        Jets1.pfc10_px        = jet1['PX_10'][i]
-                        Jets1.pfc10_py        = jet1['PY_10'][i]
-                        Jets1.pfc10_pz        = jet1['PZ_10'][i]
-                        Jets1.pfc10_ifTrack   = jet1['C_10'][i]
-                        Jets1.pfc10_pType     = jet1['PID_10'][i]
-                        Jets1.pfc11_energy    = jet1['E_11'][i]
-                        Jets1.pfc11_px        = jet1['PX_11'][i]
-                        Jets1.pfc11_py        = jet1['PY_11'][i]
-                        Jets1.pfc11_pz        = jet1['PZ_11'][i]
-                        Jets1.pfc11_ifTrack   = jet1['C_11'][i]
-                        Jets1.pfc11_pType     = jet1['PID_11'][i]
-                        Jets1.pfc12_energy    = jet1['E_12'][i]
-                        Jets1.pfc12_px        = jet1['PX_12'][i]
-                        Jets1.pfc12_py        = jet1['PY_12'][i]
-                        Jets1.pfc12_pz        = jet1['PZ_12'][i]
-                        Jets1.pfc12_ifTrack   = jet1['C_12'][i]
-                        Jets1.pfc12_pType     = jet1['PID_12'][i]
-                        Jets1.pfc13_energy    = jet1['E_13'][i]
-                        Jets1.pfc13_px        = jet1['PX_13'][i]
-                        Jets1.pfc13_py        = jet1['PY_13'][i]
-                        Jets1.pfc13_pz        = jet1['PZ_13'][i]
-                        Jets1.pfc13_ifTrack   = jet1['C_13'][i]
-                        Jets1.pfc13_pType     = jet1['PID_13'][i]
-                        Jets1.pfc14_energy    = jet1['E_14'][i]
-                        Jets1.pfc14_px        = jet1['PX_14'][i]
-                        Jets1.pfc14_py        = jet1['PY_14'][i]
-                        Jets1.pfc14_pz        = jet1['PZ_14'][i]
-                        Jets1.pfc14_ifTrack   = jet1['C_14'][i]
-                        Jets1.pfc14_pType     = jet1['PID_14'][i]
-                        Jets1.pfc15_energy    = jet1['E_15'][i]
-                        Jets1.pfc15_px        = jet1['PX_15'][i]
-                        Jets1.pfc15_py        = jet1['PY_15'][i]
-                        Jets1.pfc15_pz        = jet1['PZ_15'][i]
-                        Jets1.pfc15_ifTrack   = jet1['C_15'][i]
-                        Jets1.pfc15_pType     = jet1['PID_15'][i]
-                        Jets1.pfc16_energy    = jet1['E_16'][i]
-                        Jets1.pfc16_px        = jet1['PX_16'][i]
-                        Jets1.pfc16_py        = jet1['PY_16'][i]
-                        Jets1.pfc16_pz        = jet1['PZ_16'][i]
-                        Jets1.pfc16_ifTrack   = jet1['C_16'][i]
-                        Jets1.pfc16_pType     = jet1['PID_16'][i]
-                        Jets1.pfc17_energy    = jet1['E_17'][i]
-                        Jets1.pfc17_px        = jet1['PX_17'][i]
-                        Jets1.pfc17_py        = jet1['PY_17'][i]
-                        Jets1.pfc17_pz        = jet1['PZ_17'][i]
-                        Jets1.pfc17_ifTrack   = jet1['C_17'][i]
-                        Jets1.pfc17_pType     = jet1['PID_17'][i]
-                        Jets1.pfc18_energy    = jet1['E_18'][i]
-                        Jets1.pfc18_px        = jet1['PX_18'][i]
-                        Jets1.pfc18_py        = jet1['PY_18'][i]
-                        Jets1.pfc18_pz        = jet1['PZ_18'][i]
-                        Jets1.pfc18_ifTrack   = jet1['C_18'][i]
-                        Jets1.pfc18_pType     = jet1['PID_18'][i]
-                        Jets1.pfc19_energy    = jet1['E_19'][i]
-                        Jets1.pfc19_px        = jet1['PX_19'][i]
-                        Jets1.pfc19_py        = jet1['PY_19'][i]
-                        Jets1.pfc19_pz        = jet1['PZ_19'][i]
-                        Jets1.pfc19_ifTrack   = jet1['C_19'][i]
-                        Jets1.pfc19_pType     = jet1['PID_19'][i]
-                        Jets1.pfc20_energy    = jet1['E_20'][i]
-                        Jets1.pfc20_px        = jet1['PX_20'][i]
-                        Jets1.pfc20_py        = jet1['PY_20'][i]
-                        Jets1.pfc20_pz        = jet1['PZ_20'][i]
-                        Jets1.pfc20_ifTrack   = jet1['C_20'][i]
-                        Jets1.pfc20_pType     = jet1['PID_20'][i]
-                        Jets1.pfc21_energy    = jet1['E_21'][i]
-                        Jets1.pfc21_px        = jet1['PX_21'][i]
-                        Jets1.pfc21_py        = jet1['PY_21'][i]
-                        Jets1.pfc21_pz        = jet1['PZ_21'][i]
-                        Jets1.pfc21_ifTrack   = jet1['C_21'][i]
-                        Jets1.pfc21_pType     = jet1['PID_21'][i]
-                        Jets1.pfc22_energy    = jet1['E_22'][i]
-                        Jets1.pfc22_px        = jet1['PX_22'][i]
-                        Jets1.pfc22_py        = jet1['PY_22'][i]
-                        Jets1.pfc22_pz        = jet1['PZ_22'][i]
-                        Jets1.pfc22_ifTrack   = jet1['C_22'][i]
-                        Jets1.pfc22_pType     = jet1['PID_22'][i]
-                        Jets1.pfc23_energy    = jet1['E_23'][i]
-                        Jets1.pfc23_px        = jet1['PX_23'][i]
-                        Jets1.pfc23_py        = jet1['PY_23'][i]
-                        Jets1.pfc23_pz        = jet1['PZ_23'][i]
-                        Jets1.pfc23_ifTrack   = jet1['C_23'][i]
-                        Jets1.pfc23_pType     = jet1['PID_23'][i]
-                        Jets1.pfc24_energy    = jet1['E_24'][i]
-                        Jets1.pfc24_px        = jet1['PX_24'][i]
-                        Jets1.pfc24_py        = jet1['PY_24'][i]
-                        Jets1.pfc24_pz        = jet1['PZ_24'][i]
-                        Jets1.pfc24_ifTrack   = jet1['C_24'][i]
-                        Jets1.pfc24_pType     = jet1['PID_24'][i]
-                        Jets1.pfc25_energy    = jet1['E_25'][i]
-                        Jets1.pfc25_px        = jet1['PX_25'][i]
-                        Jets1.pfc25_py        = jet1['PY_25'][i]
-                        Jets1.pfc25_pz        = jet1['PZ_25'][i]
-                        Jets1.pfc25_ifTrack   = jet1['C_25'][i]
-                        Jets1.pfc25_pType     = jet1['PID_25'][i]
-                        Jets1.pfc26_energy    = jet1['E_26'][i]
-                        Jets1.pfc26_px        = jet1['PX_26'][i]
-                        Jets1.pfc26_py        = jet1['PY_26'][i]
-                        Jets1.pfc26_pz        = jet1['PZ_26'][i]
-                        Jets1.pfc26_ifTrack   = jet1['C_26'][i]
-                        Jets1.pfc26_pType     = jet1['PID_26'][i]
-                        Jets1.pfc27_energy    = jet1['E_27'][i]
-                        Jets1.pfc27_px        = jet1['PX_27'][i]
-                        Jets1.pfc27_py        = jet1['PY_27'][i]
-                        Jets1.pfc27_pz        = jet1['PZ_27'][i]
-                        Jets1.pfc27_ifTrack   = jet1['C_27'][i]
-                        Jets1.pfc27_pType     = jet1['PID_27'][i]
-                        Jets1.pfc28_energy    = jet1['E_28'][i]
-                        Jets1.pfc28_px        = jet1['PX_28'][i]
-                        Jets1.pfc28_py        = jet1['PY_28'][i]
-                        Jets1.pfc28_pz        = jet1['PZ_28'][i]
-                        Jets1.pfc28_ifTrack   = jet1['C_28'][i]
-                        Jets1.pfc28_pType     = jet1['PID_28'][i]
-                        Jets1.pfc29_energy    = jet1['E_29'][i]
-                        Jets1.pfc29_px        = jet1['PX_29'][i]
-                        Jets1.pfc29_py        = jet1['PY_29'][i]
-                        Jets1.pfc29_pz        = jet1['PZ_29'][i]
-                        Jets1.pfc29_ifTrack   = jet1['C_29'][i]
-                        Jets1.pfc29_pType     = jet1['PID_29'][i]
-                        Jets1.pfc30_energy    = jet1['E_30'][i]
-                        Jets1.pfc30_px        = jet1['PX_30'][i]
-                        Jets1.pfc30_py        = jet1['PY_30'][i]
-                        Jets1.pfc30_pz        = jet1['PZ_30'][i]
-                        Jets1.pfc30_ifTrack   = jet1['C_30'][i]
-                        Jets1.pfc30_pType     = jet1['PID_30'][i]
-                        Jets1.pfc31_energy    = jet1['E_31'][i]
-                        Jets1.pfc31_px        = jet1['PX_31'][i]
-                        Jets1.pfc31_py        = jet1['PY_31'][i]
-                        Jets1.pfc31_pz        = jet1['PZ_31'][i]
-                        Jets1.pfc31_ifTrack   = jet1['C_31'][i]
-                        Jets1.pfc31_pType     = jet1['PID_31'][i]
-                        Jets1.pfc32_energy    = jet1['E_32'][i]
-                        Jets1.pfc32_px        = jet1['PX_32'][i]
-                        Jets1.pfc32_py        = jet1['PY_32'][i]
-                        Jets1.pfc32_pz        = jet1['PZ_32'][i]
-                        Jets1.pfc32_ifTrack   = jet1['C_32'][i]
-                        Jets1.pfc32_pType     = jet1['PID_32'][i]
-                        Jets1.pfc33_energy    = jet1['E_33'][i]
-                        Jets1.pfc33_px        = jet1['PX_33'][i]
-                        Jets1.pfc33_py        = jet1['PY_33'][i]
-                        Jets1.pfc33_pz        = jet1['PZ_33'][i]
-                        Jets1.pfc33_ifTrack   = jet1['C_33'][i]
-                        Jets1.pfc33_pType     = jet1['PID_33'][i]
-                        Jets1.pfc34_energy    = jet1['E_34'][i]
-                        Jets1.pfc34_px        = jet1['PX_34'][i]
-                        Jets1.pfc34_py        = jet1['PY_34'][i]
-                        Jets1.pfc34_pz        = jet1['PZ_34'][i]
-                        Jets1.pfc34_ifTrack   = jet1['C_34'][i]
-                        Jets1.pfc34_pType     = jet1['PID_34'][i]
-                        Jets1.pfc35_energy    = jet1['E_35'][i]
-                        Jets1.pfc35_px        = jet1['PX_35'][i]
-                        Jets1.pfc35_py        = jet1['PY_35'][i]
-                        Jets1.pfc35_pz        = jet1['PZ_35'][i]
-                        Jets1.pfc35_ifTrack   = jet1['C_35'][i]
-                        Jets1.pfc35_pType     = jet1['PID_35'][i]
-                        Jets1.pfc36_energy    = jet1['E_36'][i]
-                        Jets1.pfc36_px        = jet1['PX_36'][i]
-                        Jets1.pfc36_py        = jet1['PY_36'][i]
-                        Jets1.pfc36_pz        = jet1['PZ_36'][i]
-                        Jets1.pfc36_ifTrack   = jet1['C_36'][i]
-                        Jets1.pfc36_pType     = jet1['PID_36'][i]
-                        Jets1.pfc37_energy    = jet1['E_37'][i]
-                        Jets1.pfc37_px        = jet1['PX_37'][i]
-                        Jets1.pfc37_py        = jet1['PY_37'][i]
-                        Jets1.pfc37_pz        = jet1['PZ_37'][i]
-                        Jets1.pfc37_ifTrack   = jet1['C_37'][i]
-                        Jets1.pfc37_pType     = jet1['PID_37'][i]
-                        Jets1.pfc38_energy    = jet1['E_38'][i]
-                        Jets1.pfc38_px        = jet1['PX_38'][i]
-                        Jets1.pfc38_py        = jet1['PY_38'][i]
-                        Jets1.pfc38_pz        = jet1['PZ_38'][i]
-                        Jets1.pfc38_ifTrack   = jet1['C_38'][i]
-                        Jets1.pfc38_pType     = jet1['PID_38'][i]
-                        Jets1.pfc39_energy    = jet1['E_39'][i]
-                        Jets1.pfc39_px        = jet1['PX_39'][i]
-                        Jets1.pfc39_py        = jet1['PY_39'][i]
-                        Jets1.pfc39_pz        = jet1['PZ_39'][i]
-                        Jets1.pfc39_ifTrack   = jet1['C_39'][i]
-                        Jets1.pfc39_pType     = jet1['PID_39'][i]
-                        Jets1.pfc40_energy    = jet1['E_40'][i]
-                        Jets1.pfc40_px        = jet1['PX_40'][i]
-                        Jets1.pfc40_py        = jet1['PY_40'][i]
-                        Jets1.pfc40_pz        = jet1['PZ_40'][i]
-                        Jets1.pfc40_ifTrack   = jet1['C_40'][i]
-                        Jets1.pfc40_pType     = jet1['PID_40'][i]
+                        attr_out = forLolaSix.attrTypeList 
+                        for ii in range(forLolaSix.nConstit):  
+                            for strO in attr_out:
+                                tempAttrStrO = 'pfc' + str(ii+1) + '_' + strO
+                                tempAttrStrI =  forLolaSix.attrNameDic[strO] + '_' + str(ii+1)
+                                setattr( Jets1 , tempAttrStrO , jet1[tempAttrStrI][i] )
 
 
                 newTree.Fill()
 
         #########################################################  
-        if i%ti == 1 and i>ti:
+        if i%ti == 1 and i>ti: 
             end = timer() 
             dt = end-start
             tl = int( ((NofEntries-i)/ti ) * dt )
@@ -837,7 +399,7 @@ p.start()
 
 
 #_____________________________________________old lines:
-    """
+"""
     for j in range(num_of_jets):
         if 'QCD' in name:
             #oldTree.SetBranchAddress( 'Jets' , AddressOf(Jet_old_dict[j+1], 'pt') )
@@ -845,7 +407,7 @@ p.start()
         elif 'ctauS' in name:
             #oldTree.SetBranchAddress( 'MatchedCHSJet' + str(j+1) , AddressOf(Jet_old_dict[j+1], 'pt') )
             #oldTree.SetBranchAddress( 'Jets' , AddressOf(Jet_old_dict[j+1], 'pt') )
-    """ 
+""" 
 
 
 
