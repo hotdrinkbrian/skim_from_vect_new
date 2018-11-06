@@ -30,6 +30,7 @@ path        = '/beegfs/desy/user/hezhiyua/backed/fromLisa/fromLisaLLP//'
 #path        = '/beegfs/desy/user/hezhiyua/backed/dustData/'+'crab_folder_v2/'#'/home/brian/datas/roottest/'
 #inName     = 'VBFH_HToSSTobbbb_MH-125_MS-40_ctauS-500_jetOnly.root'
 testOn      = 0
+nLimit      = 100000#1000000
 numOfEntriesToScan = 100 #only when testOn = 1
 NumOfVecEl  = 6
 Npfc        = 40
@@ -289,8 +290,8 @@ def skim_c( name , newFileName ):
     oldTree = oldFile.Get("ntuple/tree") 
     NofEntries = oldTree.GetEntriesFast()
     numOfEntriesToScan_local = NofEntries
-    if NofEntries > 1000000:
-        numOfEntriesToScan_local = 1000000
+    if NofEntries > nLimit:
+        numOfEntriesToScan_local = nLimit
     if testOn == 1:
         numOfEntriesToScan_local = numOfEntriesToScan  
     #locate and register the Jet branches of the old ttree
