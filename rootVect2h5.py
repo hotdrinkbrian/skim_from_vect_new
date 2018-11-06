@@ -26,8 +26,8 @@ forLolaFive = structure(model='lola',nConstit=40,dimOfVect=5)
 forLolaSix  = structure(model='lola',nConstit=40,dimOfVect=6)
 
 
-
-path        = '/beegfs/desy/user/hezhiyua/backed/dustData/'+'crab_folder_v2/'#'/home/brian/datas/roottest/'
+path        = '/beegfs/desy/user/hezhiyua/backed/fromLisa/fromLisaLLP//'
+#path        = '/beegfs/desy/user/hezhiyua/backed/dustData/'+'crab_folder_v2/'#'/home/brian/datas/roottest/'
 #inName     = 'VBFH_HToSSTobbbb_MH-125_MS-40_ctauS-500_jetOnly.root'
 testOn      = 0
 numOfEntriesToScan = 100 #only when testOn = 1
@@ -45,20 +45,21 @@ fn          = ''
 newFileName = fn.replace('.root','_skimed.root')
 lola_on     = 0 # 1: prepared for lola
 ct_dep      = 0 #1 for ct dependence comparison
-cut_on      = 1
+cut_on      = 1#1
 life_time   = ['500'] #['0','0p1','0p05','1','5','10','25','50','100','500','1000','2000','5000','10000']
-num_of_jets = 1 #4
 
+num_of_jets = 1 #4
 treeName    = 'tree44'
 JetName     = 'Jet1s'
 
 len_of_lt = len(life_time)
 
 pars = argparse.ArgumentParser()
-pars.add_argument('--ht',action='store',type=int,help='specify HT of the QCD file')
-pars.add_argument('-s'  ,action='store',type=int,help='specify if for VBF file')
-pars.add_argument('-m'  ,action='store',type=str,help='specify model')
-pars.add_argument('-t'  ,action='store',type=int,help='specify if to do test')
+pars.add_argument('--ht'    ,action='store',type=int,help='specify HT of the QCD file')
+pars.add_argument('-s'      ,action='store',type=int,help='specify if for VBF file')
+pars.add_argument('--model' ,action='store',type=str,help='specify model')
+pars.add_argument('-t'      ,action='store',type=int,help='specify if to do test')
+pars.add_argument('--mass'  ,action='store',type=int,help='specify signal mass')
 args = pars.parse_args()
 if args.ht:
     HT = str( args.ht ) 
@@ -67,16 +68,20 @@ if args.s:
 if args.t:
     testOn = 1
 
-if   args.m == 'bdt':
+if   args.model == 'bdt':
     lola_on    = 0
-elif args.m == 'lola5':
+elif args.model == 'lola5':
     lola_on    = 1
     NumOfVecEl = 5
-elif args.m == 'lola6':
+elif args.model == 'lola6':
     lola_on    = 1
     NumOfVecEl = 6
 
+if args.mass:
+    sgn_mass = args.mass
     
+
+
 
 
 if   ct_dep == 0:
@@ -89,11 +94,24 @@ if   ct_dep == 0:
         channel = {'QCD':'QCD_HT200to300_' + versionN_b + '.root'}
     elif '300' == HT:
         channel = {'QCD':'QCD_HT300to500_' + versionN_b + '.root'}
+
+    elif '500' == HT:
+        channel = {'QCD':'QCD_HT500to700_' + versionN_b + '.root'}
+    elif '700' == HT:
+        channel = {'QCD':'QCD_HT700to1000_' + versionN_b + '.root'}
+    elif '1000' == HT:
+        channel = {'QCD':'QCD_HT1000to1500_' + versionN_b + '.root'}
+    elif '1500' == HT:
+        channel = {'QCD':'QCD_HT1500to2000_' + versionN_b + '.root'}
+    elif '2000' == HT:
+        channel = {'QCD':'QCD_HT2000toInf_' + versionN_b + '.root'}
+
+
 elif ct_dep == 1:
     matchOn = 1
     channel = {}
     for lt in life_time:
-        channel['ct' + lt] = 'VBFH_HToSSTobbbb_MH-125_MS-40_ctauS-' + lt + '_' + versionN_s + '.root'
+        channel['ct' + lt] = 'VBFH_HToSSTobbbb_MH-125_MS-' + str(sgn_mass) + '_ctauS-' + lt + '_' + versionN_s + '.root'
 
 # Struct
 if   lola_on == 0:
@@ -152,8 +170,10 @@ if lola_on == 1:
     nEntries = b1.GetEntries()
 
 
-    if testOn == 0:
+    if testOn == 0: 
         numOfEntriesToScan = nEntries
+        if nEntries > 1000000:
+            numOfEntriesToScan = 1000000 
 
     nr = 0
     for entry in t1:
@@ -260,7 +280,6 @@ if lola_on == 1:
 
 #-----------------------------------------------------------------------------------------------------------
 def skim_c( name , newFileName ):
-    numOfEntriesToScan_local = numOfEntriesToScan
     #--------------------------------
     Jet_old_dict = {}
     for j in range(num_of_jets):
@@ -269,6 +288,11 @@ def skim_c( name , newFileName ):
     oldFile = TFile(name, "READ")
     oldTree = oldFile.Get("ntuple/tree") 
     NofEntries = oldTree.GetEntriesFast()
+    numOfEntriesToScan_local = NofEntries
+    if NofEntries > 1000000:
+        numOfEntriesToScan_local = 1000000
+    if testOn == 1:
+        numOfEntriesToScan_local = numOfEntriesToScan  
     #locate and register the Jet branches of the old ttree
     print 'skimming file',oldFile.GetName(),'\tevents =',oldTree.GetEntries(),'\tweight =',oldTree.GetWeight()
     print 'filename:', name
@@ -279,19 +303,15 @@ def skim_c( name , newFileName ):
     if   lola_on == 0:
         forBDT.branchLeafStrGen()
         newTree.Branch( JetName, Jets1, forBDT.branchLeafStr )
-        if testOn == 0:
-            numOfEntriesToScan_local = oldTree.GetEntriesFast()
+   
     elif lola_on == 1:
         if NumOfVecEl == 5:
             forLolaFive.branchLeafStrGen() 
             newTree.Branch( JetName, Jets1, forLolaFive.branchLeafStr )
-            if testOn == 0:
-                numOfEntriesToScan_local = oldTree.GetEntriesFast()
+
         elif NumOfVecEl == 6:
             forLolaSix.branchLeafStrGen()
-            newTree.Branch( JetName, Jets1, forLolaSix.branchLeafStr )  
-            if testOn == 0:
-                numOfEntriesToScan_local = oldTree.GetEntriesFast()
+            newTree.Branch( JetName, Jets1, forLolaSix.branchLeafStr )   
     # this attribute list must exactly match (the order of) the features in the header file!!!! 
     
 
@@ -317,7 +337,7 @@ def skim_c( name , newFileName ):
 
                     for k in xrange( oldTree.Jets.size() ):
                         #print oldTree.Jets.size() 
-                        if k == 1:
+                        if k == 1:#k < 5:#k == 1:
                             if cut_on == 0:
                                 condition_str_dict[j+1] = '1'
                             if eval( condition_str_dict[j+1] ):
@@ -357,7 +377,7 @@ def skim_c( name , newFileName ):
         if i%ti == 1 and i>ti: 
             end = timer() 
             dt = end-start
-            tl = int( ((NofEntries-i)/ti ) * dt )
+            tl = int( ((numOfEntriesToScan_local-i)/ti ) * dt ) #NofEntries
             if tl > 60:
                 sys.stdout.write("\r" + 'time left: ' + str( tl/60 ) + 'min' )
                 sys.stdout.flush()
