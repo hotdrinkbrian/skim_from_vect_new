@@ -26,16 +26,17 @@ forLolaFive = structure(model='lola',nConstit=40,dimOfVect=5)
 forLolaSix  = structure(model='lola',nConstit=40,dimOfVect=6)
 
 
-path        = '/beegfs/desy/user/hezhiyua/backed/fromLisa/fromLisaLLP//'
-#path        = '/beegfs/desy/user/hezhiyua/backed/dustData/'+'crab_folder_v2/'#'/home/brian/datas/roottest/'
-#inName     = 'VBFH_HToSSTobbbb_MH-125_MS-40_ctauS-500_jetOnly.root'
-testOn      = 0
-nLimit      = 1000000000000#100000#1000000
+path               = '/beegfs/desy/user/hezhiyua/backed/fromLisa/fromLisaLLP//'
+#path              = '/beegfs/desy/user/hezhiyua/backed/dustData/'+'crab_folder_v2/'#'/home/brian/datas/roottest/'
+#inName            = 'VBFH_HToSSTobbbb_MH-125_MS-40_ctauS-500_jetOnly.root'
+testOn             = 0
+nonLeadingJetsOn   = 0
+nLimit             = 1000000000000#100000#1000000
 numOfEntriesToScan = 100 #only when testOn = 1
-NumOfVecEl  = 6
-Npfc        = 40
-#scanDepth  = 44
-vectName    = 'MatchedCHSJet1' #'Jets'
+NumOfVecEl         = 6
+Npfc               = 40
+#scanDepth         = 44
+vectName           = 'MatchedCHSJet1' #'Jets'
 
 #adjusted for different oldfile location
 args1       = '/beegfs/desy/user/hezhiyua/2bBacked/skimmed/'#'.'
@@ -320,22 +321,21 @@ def skim_c( name , newFileName ):
     ##########################################################    
     countNE    = 0
     iEventL    = []
-    iEventDict = {}
+    iEventL_ex = []
     attr       = forBDT.preList + forBDT.attrList
     for i in range(  0 , numOfEntriesToScan_local  ):
         oldTree.GetEntry(i)
         if oldTree.Jets.size() > 1:
             for k in xrange( oldTree.Jets.size() ):
                 if k == 1:
-                   
-                #if k != 1:
                     if cut_on == 0:
                         condition_str_dict[j+1] = '1'
-                    if eval( condition_str_dict[j+1] ):
-                         
+                    if eval( condition_str_dict[j+1] ):      
                         if i not in iEventL:
                             iEventL.append( i )
-                        countNE += 1  
+                        #countNE += 1  
+        if oldTree.Jets.size() > 2:
+            iEventL_ex.append( i )
     ##########################################################
                 
 
@@ -432,13 +432,22 @@ def skim_c( name , newFileName ):
                 newTree.Fill()
 
 
+    if nonLeadingJetsOn == 1:
+        for i in iEventL_ex:
+            oldTree.GetEntry(i)
+            for k in xrange( oldTree.Jets.size() - 2 ):
+                if cut_on == 0:
+                    condition_str_dict[j+1] = '1'
+                if eval( condition_str_dict[j+1] ):
+                    for stri in attr:
+                        setattr( Jets1 , stri , getattr(oldTree.Jets[k+2],stri) )           
+    
+                    if   Jets1.FracCal <=  0:
+                        Jets1.FracCal    = 0.
+                    elif Jets1.FracCal > 400:
+                        Jets1.FracCal    = 400.   
+                    newTree.Fill()
 
-    
-    #for i in range(8):                
-    #    for stri in attr:
-    #        setattr( Jets1 , stri , 0 )
-    #    newTree.Fill()
-    
 
 
         #########################################################  
