@@ -30,7 +30,7 @@ path               = '/beegfs/desy/user/hezhiyua/backed/fromLisa/fromLisaLLP//'
 #path              = '/beegfs/desy/user/hezhiyua/backed/dustData/'+'crab_folder_v2/'#'/home/brian/datas/roottest/'
 #inName            = 'VBFH_HToSSTobbbb_MH-125_MS-40_ctauS-500_jetOnly.root'
 testOn             = 0
-nonLeadingJetsOn   = 0#0
+nonLeadingJetsOn   = 1#0
 nLimit             = 1000000000000#100000#1000000
 numOfEntriesToScan = 100 #only when testOn = 1
 NumOfVecEl         = 6
@@ -39,7 +39,8 @@ Npfc               = 40
 vectName           = 'MatchedCHSJet1' #'Jets'
 
 #adjusted for different oldfile location
-args1       = '/beegfs/desy/user/hezhiyua/2bBacked/skimmed/'#'.'
+#args1       = '/beegfs/desy/user/hezhiyua/2bBacked/skimmed/withNonLeadingJets/'
+args1       = '/beegfs/desy/user/hezhiyua/2bBacked/skimmed/withNonLeadingJets/'
 versionN_b  = 'TuneCUETP8M1_13TeV-madgraphMLM-pythia8-v1'
 versionN_s  = 'TuneCUETP8M1_13TeV-powheg-pythia8_PRIVATE-MC'
 HT          = '50'
@@ -335,20 +336,37 @@ def skim_c( name , newFileName ):
             #if eval( condition_str_dict[j+1] ):  
         if lola_on == 0:      
             for k in xrange( oldTree.Jets.size() ):
-                if k == 1:
-                    if cut_on == 0:
-                        condition_str_dict[j+1] = '1'
-                    if eval( condition_str_dict[j+1] ):
-                        for stri in attr:
-                            setattr( Jets1 , stri , getattr(oldTree.Jets[k],stri) ) 
-                              
-                        if   Jets1.FracCal <=  0:
-                            Jets1.FracCal    = 0.
-                        elif Jets1.FracCal > 400:
-                            Jets1.FracCal    = 400.
+                if nonLeadingJetsOn == 0:    
+                    if k == 1:
+                        if cut_on == 0:
+                            condition_str_dict[j+1] = '1'
+                        if eval( condition_str_dict[j+1] ):
+                            for stri in attr:
+                                setattr( Jets1 , stri , getattr(oldTree.Jets[k],stri) ) 
+                                  
+                            if   Jets1.FracCal <=  0:
+                                Jets1.FracCal    = 0.
+                            elif Jets1.FracCal > 400:
+                                Jets1.FracCal    = 400.
+    
+                            newTree.Fill()    
 
-                        newTree.Fill()    
-   
+                elif nonLeadingJetsOn == 1:               
+                    if k > 0:
+                        if cut_on == 0:
+                            condition_str_dict[j+1] = '1'
+                        if eval( condition_str_dict[j+1] ):
+                            for stri in attr:
+                                setattr( Jets1 , stri , getattr(oldTree.Jets[k],stri) )
+                               
+                            if   Jets1.FracCal <=  0:
+                                Jets1.FracCal    = 0.
+                            elif Jets1.FracCal > 400:
+                                Jets1.FracCal    = 400.
+ 
+                            newTree.Fill() 
+                
+
                     
         elif lola_on == 1:
 
