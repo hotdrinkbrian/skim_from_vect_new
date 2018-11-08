@@ -711,7 +711,7 @@ JetTypePFC_sixVect(): pfc1_energy(0.), pfc1_px(0.), pfc1_py(0.), pfc1_pz(0.), pf
 
 
 
-
+/*
 struct JetType {
 JetType(): pt(-1.), eta(-9.), phi(-9.), mass(-1.), energy(-1.), ptRaw(-1.), ptUnc(-1.), dPhi_met(-1.), dPhi_Jet1(-1.), puId(-1.), CSV(-99.), CSVR(-99.), CSVRUp(-99.), CSVRDown(-99.), CMVA(-99.), CMVAR(-99.), CMVARUp(-99.), CMVARDown(-99.), QGLikelihood(-1.), cHadE(-1.), nHadE (-1.), cHadEFrac(-1.), nHadEFrac(-1.), nEmE(-1.), nEmEFrac(-1.), cEmE(-1.), cEmEFrac(-1.), cmuE(-1.), cmuEFrac(-1.), muE(-1.), muEFrac(-1.), eleE(-1.), eleEFrac(-1.), eleMulti(-1.), photonE(-1.), photonEFrac(-1.), photonMulti(-1.), cHadMulti(-1.), nHadMulti(-1.), npr(-1.), cMulti(-1.), nMulti(-1.), emEFrac(-1.), emEinEB(-1.), emEinEE(-1.), emEinHF(-1.), EFracHad(-1.), hadEinHB(-1.), hadEinHE(-1.), hadEinHF(-1.), hadEinHO(-1.), ptGenJ(-10.), etaGenJ(-4.), phiGenJ(-4.), massGenJ(-10.),ptGen(-10.), etaGen(-4.), phiGen(-4.), massGen(-10.), pdgIdGen(0.), ptLhe(-10.), etaLhe(-4.), phiLhe(-4.), partonFlavour(0), hadronFlavour(0), mother(0), isLoose(false), isMedium(false), isTight(false), isTightLepVeto(false), isCSVL(false), isCSVM(false), isCSVT(false), isMatched(false), dR_q1(1000), dR_q2(1000), dR_q3(1000), dR_q4(1000), m_q1(false), m_q2(false), m_q3(false), m_q4(false), dR_pi1(1000), dR_pi2(1000), matchBquark(-1), matchLL(-1), original_jet_index(-1), isGenMatched(0), isMatchedToMatchedCHSJet(-1), alphaMax(-100.), sigIP2DMedian(-100.), theta2DMedian(-100.), hcalE(-100.), ecalE(-100.), FracCal(-100.), flightDist2d(-100.), flightDist2dSig(-100.), flightDist3d(-100.), flightDist3dSig(-100.), nSV(0), nSVCand(0), nVertexTracks(0), nSelectedTracks(0), dRSVJet(-100.), SV_x(-100.), SV_y(-100.), SV_z(-100.), SV_dx(-100.), SV_dy(-100.), SV_dz(-100.), nTracksSV(0), SV_mass(-100.), indexSV(0) {}
     float pt;
@@ -831,6 +831,7 @@ JetType(): pt(-1.), eta(-9.), phi(-9.), mass(-1.), energy(-1.), ptRaw(-1.), ptUn
     float SV_mass;
     int indexSV;
 };
+*/
 
 
 
@@ -839,9 +840,8 @@ JetType(): pt(-1.), eta(-9.), phi(-9.), mass(-1.), energy(-1.), ptRaw(-1.), ptUn
 
 
 
-
-struct JetsType {
-JetsType(): pt(-1.), eta(-9.), phi(-9.), mass(-1.), energy(-1.), ptRaw(-1.), ptUnc(-1.), dPhi_met(-1.), dPhi_Jet1(-1.), puId(-1.), CSV(-99.), CSVR(-99.), CSVRUp(-99.), CSVRDown(-99.), CMVA(-99.), CMVAR(-99.), CMVARUp(-99.), CMVARDown(-99.), QGLikelihood(-1.), cHadE(-1.), nHadE (-1.), cHadEFrac(-1.), nHadEFrac(-1.), nEmE(-1.), nEmEFrac(-1.), cEmE(-1.), cEmEFrac(-1.), cmuE(-1.), cmuEFrac(-1.), muE(-1.), muEFrac(-1.), eleE(-1.), eleEFrac(-1.), eleMulti(-1.), photonE(-1.), photonEFrac(-1.), photonMulti(-1.), cHadMulti(-1.), npr(-1.), cMulti(-1.), nMulti(-1.), emEFrac(-1.), emEinEB(-1.), emEinEE(-1.), emEinHF(-1.), EFracHad(-1.), hadEinHB(-1.), hadEinHE(-1.), hadEinHF(-1.), hadEinHO(-1.), ptGenJ(-10.), etaGenJ(-4.), phiGenJ(-4.), massGenJ(-10.),ptGen(-10.), etaGen(-4.), phiGen(-4.), massGen(-10.), pdgIdGen(0.), ptLhe(-10.), etaLhe(-4.), phiLhe(-4.), partonFlavour(0), hadronFlavour(0), mother(0), isLoose(false), isMedium(false), isTight(false), isTightLepVeto(false), isCSVL(false), isCSVM(false), isCSVT(false), isMatched(false), dR_q1(1000), dR_q2(1000), dR_q3(1000), dR_q4(1000), m_q1(false), m_q2(false), m_q3(false), m_q4(false), dR_pi1(1000), dR_pi2(1000), matchBquark(-1), matchLL(-1), original_jet_index(-1), isGenMatched(0), isMatchedToMatchedCHSJet(-1), alphaMax(-100.), sigIP2DMedian(-100.), theta2DMedian(-100.), hcalE(-100.), ecalE(-100.), FracCal(-100.), flightDist2d(-100.), flightDist2dSig(-100.), flightDist3d(-100.), flightDist3dSig(-100.), nSV(0), nSVCand(0), nVertexTracks(0), nSelectedTracks(0), dRSVJet(-100.), SV_x(-100.), SV_y(-100.), SV_z(-100.), SV_dx(-100.), SV_dy(-100.), SV_dz(-100.), nTracksSV(0), SV_mass(-100.), indexSV(0) {}
+struct JetType {
+JetType(): pt(-1.), eta(-9.), phi(-9.), mass(-1.), energy(-1.), ptRaw(-1.), ptUnc(-1.), dPhi_met(-1.), dPhi_Jet1(-1.), puId(-1.), CSV(-99.), CSVR(-99.), CSVRUp(-99.), CSVRDown(-99.), CMVA(-99.), CMVAR(-99.), CMVARUp(-99.), CMVARDown(-99.), QGLikelihood(-1.), cHadE(-1.), nHadE (-1.), cHadEFrac(-1.), nHadEFrac(-1.), nEmE(-1.), nEmEFrac(-1.), cEmE(-1.), cEmEFrac(-1.), cmuE(-1.), cmuEFrac(-1.), muE(-1.), muEFrac(-1.), eleE(-1.), eleEFrac(-1.), eleMulti(-1.), photonE(-1.), photonEFrac(-1.), photonMulti(-1.), cHadMulti(-1.), nHadMulti(-1.), npr(-1.), cMulti(-1.), nMulti(-1.), emEFrac(-1.), emEinEB(-1.), emEinEE(-1.), emEinHF(-1.), EFracHad(-1.), hadEinHB(-1.), hadEinHE(-1.), hadEinHF(-1.), hadEinHO(-1.), ptGenJ(-10.), etaGenJ(-4.), phiGenJ(-4.), massGenJ(-10.),ptGen(-10.), etaGen(-4.), phiGen(-4.), massGen(-10.), pdgIdGen(0.), ptLhe(-10.), etaLhe(-4.), phiLhe(-4.), partonFlavour(0), hadronFlavour(0), mother(0), isLoose(false), isMedium(false), isTight(false), isTightLepVeto(false), isCSVL(false), isCSVM(false), isCSVT(false), isMatched(false), dR_q1(1000), dR_q2(1000), dR_q3(1000), dR_q4(1000), m_q1(false), m_q2(false), m_q3(false), m_q4(false), dR_pi1(1000), dR_pi2(1000), matchBquark(-1), matchLL(-1), original_jet_index(-1), isGenMatched(0), isMatchedToMatchedCHSJet(-1), alphaMax(-100.), sigIP2DMedian(-100.), theta2DMedian(-100.), hcalE(-100.), ecalE(-100.), FracCal(-100.), flightDist2d(-100.), flightDist2dSig(-100.), flightDist3d(-100.), flightDist3dSig(-100.), nSV(0), nSVCand(0), nVertexTracks(0), nSelectedTracks(0), dRSVJet(-100.), SV_x(-100.), SV_y(-100.), SV_z(-100.), SV_dx(-100.), SV_dy(-100.), SV_dz(-100.), nTracksSV(0), SV_mass(-100.), indexSV(0) {}
     float pt;
     float eta;
     float phi;
@@ -881,6 +881,8 @@ JetsType(): pt(-1.), eta(-9.), phi(-9.), mass(-1.), energy(-1.), ptRaw(-1.), ptU
     float photonEFrac;
     float photonMulti;
     float cHadMulti;
+    float nHadMulti;    
+
     float npr;
     float cMulti;
     float nMulti;

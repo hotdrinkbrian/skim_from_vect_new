@@ -317,138 +317,59 @@ def skim_c( name , newFileName ):
     # this attribute list must exactly match (the order of) the features in the header file!!!! 
 
 
-
-    ##########################################################    
-    countNE    = 0
-    iEventL    = []
-    iEventL_ex = []
-    attr       = forBDT.preList + forBDT.attrList
-    for i in xrange(  0 , numOfEntriesToScan_local  ):
-        oldTree.GetEntry(i)
-        if oldTree.Jets.size() > 1:
-            for k in xrange( oldTree.Jets.size() ):
-                if k == 1:
-                    if cut_on == 0:
-                        condition_str_dict[j+1] = '1'
-                    if eval( condition_str_dict[j+1] ):      
-                        if i not in iEventL:
-                            iEventL.append( i )
-                        #countNE += 1  
-        if oldTree.Jets.size() > 2:
-            iEventL_ex.append( i )
-    ##########################################################
-                
-
-
+    attr = forBDT.preList + forBDT.attrList
     ti = 80000
     #theweight = oldTree.GetWeight() 
-    #for i in range(  0 , numOfEntriesToScan_local  ):    
-    for i in iEventL:
-    #for i in xrange(0,countNE):
+    for i in range(  0 , numOfEntriesToScan_local  ):    
         if      i == 0:
             start = timer()
         elif i%ti == 2:
             start = timer()
         
         oldTree.GetEntry(i)
-        #oldTree.GetEntry( iEventL[i] )   
         # selections
         # Trigger
-        for j in xrange(num_of_jets):
+        #for j in xrange(num_of_jets):
             #if cut_on == 0:
             #    condition_str_dict[j+1] = '1'
-            #if eval( condition_str_dict[j+1] ):
-            if 1:  
-  
-                if lola_on == 0:      
-  
-                    #"""
-                    for stri in attr:
-                        setattr( Jets1 , stri , getattr(oldTree.Jets[1],stri) )                     
-
-                    if   Jets1.FracCal <=  0:
-                        Jets1.FracCal    = 0.
-                    elif Jets1.FracCal > 400:
-                        Jets1.FracCal    = 400.
-                    #"""
-
-                    """  
-                    if oldTree.Jets.size() > 1:
-                        if cut_on == 0:
-                            condition_str_dict[j+1] = '1'
-                        if 1:#eval( condition_str_dict[j+1] ):
-
-                            for stri in attr:
-                                setattr( Jets1 , stri , getattr(oldTree.Jets[1],stri) )
-
-                            if   Jets1.FracCal <=  0:
-                                Jets1.FracCal    = 0.
-                            elif Jets1.FracCal > 400:
-                                Jets1.FracCal    = 400.
-                    else:
-                        for stri in attr:
-                            setattr( Jets1 , stri , -1 )         
-                    """
-
-                    """ 
-                    for k in xrange( oldTree.Jets.size() ):
-                        #print oldTree.Jets.size() 
-                        if 1:#k == 1:#k < 5:#k == 1:
-                            if cut_on == 0:
-                                condition_str_dict[j+1] = '1'
-                            if eval( condition_str_dict[j+1] ):
-                                attr = forBDT.preList + forBDT.attrList
-                                for stri in attr:
-                                    setattr( Jets1 , stri , getattr(oldTree.Jets[k],stri) ) 
-                              
-                                #print getattr(oldTree.Jets[k],'cHadEFrac')          
-
-                                if   Jets1.FracCal <=  0:
-                                    Jets1.FracCal    = 0.
-                                elif Jets1.FracCal > 400:
-                                    Jets1.FracCal    = 400.    
-                        #else: pass    
-                     """   
-                    
-                elif lola_on == 1:
-
-                    if NumOfVecEl == 5:
-                        attr_out = forLolaFive.attrTypeList
-                        for ii in range(forLolaFive.nConstit):
-                            for strO in attr_out:
-                                tempAttrStrO = 'pfc' + str(ii+1) + '_' + strO
-                                tempAttrStrI =  forLolaFive.attrNameDic[strO] + '_' + str(ii+1)
-                                setattr( Jets1 , tempAttrStrO , jet1[tempAttrStrI][i] )
-
-                    elif NumOfVecEl == 6:
-                        attr_out = forLolaSix.attrTypeList 
-                        for ii in range(forLolaSix.nConstit):  
-                            for strO in attr_out:
-                                tempAttrStrO = 'pfc' + str(ii+1) + '_' + strO
-                                tempAttrStrI =  forLolaSix.attrNameDic[strO] + '_' + str(ii+1)
-                                setattr( Jets1 , tempAttrStrO , jet1[tempAttrStrI][i] )
-
-
-                newTree.Fill()
-
-
-    if nonLeadingJetsOn == 1:
-        for i in iEventL_ex:
-            oldTree.GetEntry(i)
-            for k in xrange( oldTree.Jets.size() - 2 ):
-                if 1:#k <= 2:
+            #if eval( condition_str_dict[j+1] ):  
+        if lola_on == 0:      
+            for k in xrange( oldTree.Jets.size() ):
+                if k == 1:
                     if cut_on == 0:
                         condition_str_dict[j+1] = '1'
                     if eval( condition_str_dict[j+1] ):
                         for stri in attr:
-                            setattr( Jets1 , stri , getattr(oldTree.Jets[k+2],stri) )           
-        
+                            setattr( Jets1 , stri , getattr(oldTree.Jets[k],stri) ) 
+                              
                         if   Jets1.FracCal <=  0:
                             Jets1.FracCal    = 0.
                         elif Jets1.FracCal > 400:
-                            Jets1.FracCal    = 400.   
-                        newTree.Fill()
+                            Jets1.FracCal    = 400.
 
+                        newTree.Fill()    
+   
+                    
+        elif lola_on == 1:
+
+            if NumOfVecEl == 5:
+                attr_out = forLolaFive.attrTypeList
+                for ii in range(forLolaFive.nConstit):
+                    for strO in attr_out:
+                        tempAttrStrO = 'pfc' + str(ii+1) + '_' + strO
+                        tempAttrStrI =  forLolaFive.attrNameDic[strO] + '_' + str(ii+1)
+                        setattr( Jets1 , tempAttrStrO , jet1[tempAttrStrI][i] )
+
+            elif NumOfVecEl == 6:
+                attr_out = forLolaSix.attrTypeList 
+                for ii in range(forLolaSix.nConstit):  
+                    for strO in attr_out:
+                        tempAttrStrO = 'pfc' + str(ii+1) + '_' + strO
+                        tempAttrStrI =  forLolaSix.attrNameDic[strO] + '_' + str(ii+1)
+                        setattr( Jets1 , tempAttrStrO , jet1[tempAttrStrI][i] )
+
+
+        #newTree.Fill()
 
 
         #########################################################  
