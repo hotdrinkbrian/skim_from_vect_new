@@ -1,7 +1,7 @@
 #ifndef OBJECTS_H
 #define OBJECTS_H
 
-
+/*
 struct JetTypeSmall {
 JetTypeSmall(): pt(-1.), eta(-9.), phi(-9.), mass(-1.), energy(-1.), cHadE(-1.), nHadE (-1.), cHadEFrac(-1.), nHadEFrac(-1.), nEmE(-1.), nEmEFrac(-1.), cEmE(-1.), cEmEFrac(-1.), cmuE(-1.), cmuEFrac(-1.), muE(-1.), muEFrac(-1.), eleE(-1.), eleEFrac(-1.), eleMulti(-1.), photonE(-1.), photonEFrac(-1.), photonMulti(-1.), cHadMulti(-1.), nHadMulti(-1.), npr(-1.), cMulti(-1.), nMulti(-1.),    FracCal(-100.){}
     float pt;
@@ -35,6 +35,45 @@ JetTypeSmall(): pt(-1.), eta(-9.), phi(-9.), mass(-1.), energy(-1.), cHadE(-1.),
     float nMulti;
 
     float FracCal;
+};
+*/
+
+
+struct JetTypeSmall {
+JetTypeSmall(): pt(-1.), eta(-9.), phi(-9.), mass(-1.), energy(-1.), cHadEFrac(-1.), nHadEFrac(-1.), nEmEFrac(-1.), cEmEFrac(-1.), cmuEFrac(-1.), muEFrac(-1.), eleEFrac(-1.), eleMulti(-1.), photonEFrac(-1.), photonMulti(-1.), cHadMulti(-1.), nHadMulti(-1.), npr(-1.), cMulti(-1.), nMulti(-1.),    FracCal(-100.),   DisplacedJetsTriggerBool(-1.){}
+    float pt;
+    float eta;
+    float phi;
+    float mass;
+    float energy;
+
+//    float cHadE;
+//    float nHadE;
+    float cHadEFrac;
+    float nHadEFrac;
+//    float nEmE;
+    float nEmEFrac;
+//    float cEmE;
+    float cEmEFrac;
+//    float cmuE;
+    float cmuEFrac;
+//    float muE;
+    float muEFrac;
+//    float eleE;
+    float eleEFrac;
+    float eleMulti;
+//    float photonE;
+    float photonEFrac;
+    float photonMulti;
+    float cHadMulti;
+    float nHadMulti;
+    float npr;
+    float cMulti;
+    float nMulti;
+
+    float FracCal;
+
+    float DisplacedJetsTriggerBool; 
 };
 
 

@@ -14,7 +14,9 @@ class structure:
         if self.model == 'bdt':
             self.imageOn      = 0
             self.defaultValue = -1.
-            self.attrList     = ['cHadE','nHadE','cHadEFrac','nHadEFrac','nEmE','nEmEFrac','cEmE','cEmEFrac','cmuE','cmuEFrac','muE','muEFrac','eleE','eleEFrac','eleMulti','photonE','photonEFrac','photonMulti','cHadMulti','nHadMulti','npr','cMulti','nMulti','FracCal']
+            #self.attrList     = ['cHadE','nHadE','cHadEFrac','nHadEFrac','nEmE','nEmEFrac','cEmE','cEmEFrac','cmuE','cmuEFrac','muE','muEFrac','eleE','eleEFrac','eleMulti','photonE','photonEFrac','photonMulti','cHadMulti','nHadMulti','npr','cMulti','nMulti','FracCal']
+            self.attrList     = ['cHadEFrac','nHadEFrac','nEmEFrac','cEmEFrac','cmuEFrac','muEFrac','eleEFrac','eleMulti','photonEFrac','photonMulti','cHadMulti','nHadMulti','npr','cMulti','nMulti','FracCal','DisplacedJetsTriggerBool']
+ 
             self.attrDict     = {}
 
             for stri in self.attrList:
