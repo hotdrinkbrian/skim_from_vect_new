@@ -15,7 +15,7 @@ class structure:
             self.imageOn      = 0
             self.defaultValue = -1.
             #self.attrList     = ['cHadE','nHadE','cHadEFrac','nHadEFrac','nEmE','nEmEFrac','cEmE','cEmEFrac','cmuE','cmuEFrac','muE','muEFrac','eleE','eleEFrac','eleMulti','photonE','photonEFrac','photonMulti','cHadMulti','nHadMulti','npr','cMulti','nMulti','FracCal']
-            self.attrList     = ['cHadEFrac','nHadEFrac','nEmEFrac','cEmEFrac','cmuEFrac','muEFrac','eleEFrac','eleMulti','photonEFrac','photonMulti','cHadMulti','nHadMulti','npr','cMulti','nMulti','FracCal','DisplacedJetsTriggerBool']
+            self.attrList     = ['cHadEFrac','nHadEFrac','nEmEFrac','cEmEFrac','cmuEFrac','muEFrac','eleEFrac','eleMulti','photonEFrac','photonMulti','cHadMulti','nHadMulti','npr','cMulti','nMulti']
  
             self.attrDict     = {}
 
@@ -66,7 +66,7 @@ class structure:
                     self.attrDict[stri]['Type'] = newDict[stri]
 
 
-    def branchLeafStrGen(self):
+    def branchLeafStrGen(self,extraDict):
         strTrain = ''
 
         if self.model == 'bdt':
@@ -81,6 +81,10 @@ class structure:
                 for stri in self.attrTypeList:
                     tempType = self.typTransDic[ self.attrTypeDict[stri]['Type'] ] 
                     strTrain += self.preStr + str(i+1) + '_' + stri + '/' + tempType + ':'
+
+        if bool(extraDict):
+            for strj, dataTypeJ in extraDict.iteritems():
+                strTrain += strj + '/' + dataTypeJ + ':'
 
         self.branchLeafStr = strTrain[:-1]
         

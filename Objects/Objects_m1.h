@@ -40,7 +40,7 @@ JetTypeSmall(): pt(-1.), eta(-9.), phi(-9.), mass(-1.), energy(-1.), cHadE(-1.),
 
 
 struct JetTypeSmall {
-JetTypeSmall(): pt(-1.), eta(-9.), phi(-9.), mass(-1.), energy(-1.), cHadEFrac(-1.), nHadEFrac(-1.), nEmEFrac(-1.), cEmEFrac(-1.), cmuEFrac(-1.), muEFrac(-1.), eleEFrac(-1.), eleMulti(-1.), photonEFrac(-1.), photonMulti(-1.), cHadMulti(-1.), nHadMulti(-1.), npr(-1.), cMulti(-1.), nMulti(-1.),    FracCal(-100.),   DisplacedJetsTriggerBool(-1.){}
+JetTypeSmall(): pt(-1.), eta(-9.), phi(-9.), mass(-1.), energy(-1.), cHadEFrac(-1.), nHadEFrac(-1.), nEmEFrac(-1.), cEmEFrac(-1.), cmuEFrac(-1.), muEFrac(-1.), eleEFrac(-1.), eleMulti(-1.), photonEFrac(-1.), photonMulti(-1.), cHadMulti(-1.), nHadMulti(-1.), npr(-1.), cMulti(-1.), nMulti(-1.),   DisplacedJetsTriggerBool(-1.), nCHSJets(-1.){}
     float pt;
     float eta;
     float phi;
@@ -71,9 +71,9 @@ JetTypeSmall(): pt(-1.), eta(-9.), phi(-9.), mass(-1.), energy(-1.), cHadEFrac(-
     float cMulti;
     float nMulti;
 
-    float FracCal;
-
+//    float FracCal;
     float DisplacedJetsTriggerBool; 
+    float nCHSJets;
 };
 
 

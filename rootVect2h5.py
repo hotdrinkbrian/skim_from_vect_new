@@ -160,7 +160,12 @@ elif nonLeadingJetsOn == 1:
     whichJetStr = 'k>=1'
 #######################################
 DisplacedJets_Trigger_str = 'oldTree.HLT_VBF_DisplacedJet40_DisplacedTrack_v or oldTree.HLT_VBF_DisplacedJet40_DisplacedTrack_2TrackIP2DSig5_v or oldTree.HLT_HT350_DisplacedDijet40_DisplacedTrack_v or oldTree.HLT_HT350_DisplacedDijet80_DisplacedTrack_v or oldTree.HLT_VBF_DisplacedJet40_VTightID_DisplacedTrack_v or oldTree.HLT_VBF_DisplacedJet40_VVTightID_DisplacedTrack_v or oldTree.HLT_HT350_DisplacedDijet80_Tight_DisplacedTrack_v or oldTree.HLT_VBF_DisplacedJet40_VTightID_Hadronic_v or oldTree.HLT_VBF_DisplacedJet40_VVTightID_Hadronic_v or oldTree.HLT_HT650_DisplacedDijet80_Inclusive_v or oldTree.HLT_HT750_DisplacedDijet80_Inclusive_v'
-
+#######################################
+extraDict = {}
+extraDict = {
+             'DisplacedJetsTriggerBool':'F',
+             'nCHSJets'                :'F', 
+                                             }
 
 
 
@@ -313,16 +318,16 @@ def skim_c( name , newFileName ):
     newTree = TTree(treeName, treeName)
 
     if   lola_on == 0:
-        forBDT.branchLeafStrGen()
+        forBDT.branchLeafStrGen(extraDict)
         newTree.Branch( JetName, Jets1, forBDT.branchLeafStr )
    
     elif lola_on == 1:
         if NumOfVecEl == 5:
-            forLolaFive.branchLeafStrGen() 
+            forLolaFive.branchLeafStrGen(extraDict) 
             newTree.Branch( JetName, Jets1, forLolaFive.branchLeafStr )
 
         elif NumOfVecEl == 6:
-            forLolaSix.branchLeafStrGen()
+            forLolaSix.branchLeafStrGen(extraDict)
             newTree.Branch( JetName, Jets1, forLolaSix.branchLeafStr )   
     # this attribute list must exactly match (the order of) the features in the header file!!!! 
 
@@ -351,30 +356,24 @@ def skim_c( name , newFileName ):
         else: 
             DisplacedJetsTriggerBool = 0.  
         ##################################### 
+        nCHSJets = -1. 
+        #####################################
       
         if lola_on == 0:      
             for k in xrange( oldTree.Jets.size() ):
                 if not eval(whichJetStr): continue
                 if cut_on == 1:                       
                     if not eval( condition_str ): continue    
+
+                nCHSJets = oldTree.Jets.size() 
+
                 for stri in attr:
                     setattr( Jets1 , stri , getattr(oldTree.Jets[k],stri) ) 
-                #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~nan problem to be solved!      
-                FracCal = getattr(oldTree.Jets[k],'FracCal')
-                if   FracCal <= 0:
-                    setattr( Jets1 , 'FracCal' , 0. )    
-                elif FracCal > 400:
-                    setattr( Jets1 , 'FracCal' , 400. )
-                #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~nan problem to be solved!
+                
                 setattr( Jets1 , 'DisplacedJetsTriggerBool' , DisplacedJetsTriggerBool )
+                setattr( Jets1 , 'nCHSJets'                 , nCHSJets )
 
                 newTree.Fill()    
-                """  
-                if   Jets1.FracCal <=  0:
-                    Jets1.FracCal    = 0.
-                elif Jets1.FracCal > 400:
-                    Jets1.FracCal    = 400.
-                """                    
 
                     
         elif lola_on == 1:
@@ -426,7 +425,9 @@ def skim(names):
         elif 'ctauS' in channel[cc]:
             nFn = channel[cc].replace('.root','_' + str(num_of_jets) + 'j_skimed.root') #('.root','_4mj_skimed.root')
         ss = path + channel[cc]    
-        skim_c(ss,nFn)
+        #skim_c(ss,nFn)
+        pi = mp.Process(target=skim_c, args=(ss,nFn))
+        pi.start()
 #-----------===============================
 
 #=====================================================================================================
@@ -455,6 +456,19 @@ p.start()
             #oldTree.SetBranchAddress( 'Jets' , AddressOf(Jet_old_dict[j+1], 'pt') )
 """ 
 
+"""
+                #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~nan problem to be solved!      
+                FracCal = getattr(oldTree.Jets[k],'FracCal')
+                if   FracCal <= 0:
+                    setattr( Jets1 , 'FracCal' , 0. )    
+                elif FracCal > 400:
+                    setattr( Jets1 , 'FracCal' , 400. )
+                if   Jets1.FracCal <=  0:
+                    Jets1.FracCal    = 0.
+                elif Jets1.FracCal > 400:
+                    Jets1.FracCal    = 400.
+                #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~nan problem to be solved!
+"""
 
 
 """
