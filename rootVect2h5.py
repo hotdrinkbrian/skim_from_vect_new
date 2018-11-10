@@ -21,15 +21,15 @@ Js = JetType()
 
 
 
-forBDT      = structure()
-forLolaFive = structure(model='lola',nConstit=40,dimOfVect=5)
-forLolaSix  = structure(model='lola',nConstit=40,dimOfVect=6)
+
+
 
 
 path               = '/beegfs/desy/user/hezhiyua/backed/fromLisa/fromLisaLLP//'
 #path              = '/beegfs/desy/user/hezhiyua/backed/dustData/'+'crab_folder_v2/'#'/home/brian/datas/roottest/'
 #inName            = 'VBFH_HToSSTobbbb_MH-125_MS-40_ctauS-500_jetOnly.root'
 
+num_of_jets           = 1 #4
 DisplacedJets_Trigger = 0#1
 testOn                = 0
 nonLeadingJetsOn      = 0#1
@@ -53,9 +53,14 @@ ct_dep      = 0 #1 for ct dependence comparison
 cut_on      = 1#1
 life_time   = ['500'] #['0','0p1','0p05','1','5','10','25','50','100','500','1000','2000','5000','10000']
 
-num_of_jets = 1 #4
 treeName    = 'tree44'
 JetName     = 'Jet1s'
+
+extraDic = {}
+extraDic = {
+             'DisplacedJetsTriggerBool':'F',
+             #'nCHSJets'                :'F', 
+                                             }
 
 len_of_lt = len(life_time)
 
@@ -85,6 +90,12 @@ elif args.model == 'lola6':
 if args.mass:
     sgn_mass = args.mass
     
+
+
+
+forBDT    = structure(model='bdt' , nConstit=num_of_jets, preStr='J'          , extraDict=extraDic)
+forLola   = structure(model='lola', nConstit=40         , dimOfVect=NumOfVecEl, extraDict=extraDic)
+
 
 
 
@@ -161,11 +172,6 @@ elif nonLeadingJetsOn == 1:
 #######################################
 DisplacedJets_Trigger_str = 'oldTree.HLT_VBF_DisplacedJet40_DisplacedTrack_v or oldTree.HLT_VBF_DisplacedJet40_DisplacedTrack_2TrackIP2DSig5_v or oldTree.HLT_HT350_DisplacedDijet40_DisplacedTrack_v or oldTree.HLT_HT350_DisplacedDijet80_DisplacedTrack_v or oldTree.HLT_VBF_DisplacedJet40_VTightID_DisplacedTrack_v or oldTree.HLT_VBF_DisplacedJet40_VVTightID_DisplacedTrack_v or oldTree.HLT_HT350_DisplacedDijet80_Tight_DisplacedTrack_v or oldTree.HLT_VBF_DisplacedJet40_VTightID_Hadronic_v or oldTree.HLT_VBF_DisplacedJet40_VVTightID_Hadronic_v or oldTree.HLT_HT650_DisplacedDijet80_Inclusive_v or oldTree.HLT_HT750_DisplacedDijet80_Inclusive_v'
 #######################################
-extraDict = {}
-extraDict = {
-             'DisplacedJetsTriggerBool':'F',
-             'nCHSJets'                :'F', 
-                                             }
 
 
 
@@ -271,12 +277,9 @@ if lola_on == 1:
 
     print 'num of entries: ' + str(nEntries)   
 
-    if NumOfVecEl == 5:
-        forLolaFive.panColNameListGen()
-        colN = forLolaFive.panColNameList 
-    elif NumOfVecEl == 6:
-        forLolaSix.panColNameListGen()
-        colN = forLolaSix.panColNameList
+    forLola.panColNameListGen()
+    colN = forLola.panColNameList
+
 
     jet1 = pd.DataFrame(pan, columns=colN)  
 
@@ -318,22 +321,23 @@ def skim_c( name , newFileName ):
     newTree = TTree(treeName, treeName)
 
     if   lola_on == 0:
-        forBDT.branchLeafStrGen(extraDict)
+        forBDT.branchLeafStrGen()
         newTree.Branch( JetName, Jets1, forBDT.branchLeafStr )
-   
-    elif lola_on == 1:
-        if NumOfVecEl == 5:
-            forLolaFive.branchLeafStrGen(extraDict) 
-            newTree.Branch( JetName, Jets1, forLolaFive.branchLeafStr )
 
-        elif NumOfVecEl == 6:
-            forLolaSix.branchLeafStrGen(extraDict)
-            newTree.Branch( JetName, Jets1, forLolaSix.branchLeafStr )   
+
+    elif lola_on == 1:
+        forLola.branchLeafStrGen() 
+        newTree.Branch( JetName, Jets1, forLola.branchLeafStr )
+
+
+
     # this attribute list must exactly match (the order of) the features in the header file!!!! 
 
     
     
-    attr = forBDT.preList + forBDT.attrList
+    attr     = forBDT.preList + forBDT.attrTypeList
+    attr_out = forLola.attrTypeList
+    
     ti = 80000
     #theweight = oldTree.GetWeight() 
     for i in range(  0 , numOfEntriesToScan_local  ):    
@@ -356,46 +360,43 @@ def skim_c( name , newFileName ):
         else: 
             DisplacedJetsTriggerBool = 0.  
         ##################################### 
-        nCHSJets = -1. 
+        #nCHSJets = -1. 
         #####################################
       
         if lola_on == 0:      
+     
             for k in xrange( oldTree.Jets.size() ):
-                if not eval(whichJetStr): continue
+
+                if num_of_jets == 1: 
+                    if not eval(whichJetStr): continue
+                else:
+                    if not (k>=1 and k<=num_of_jets): continue 
+      
                 if cut_on == 1:                       
                     if not eval( condition_str ): continue    
 
-                nCHSJets = oldTree.Jets.size() 
+                #nCHSJets = oldTree.Jets.size() 
 
                 for stri in attr:
-                    setattr( Jets1 , stri , getattr(oldTree.Jets[k],stri) ) 
+                    strTemp = 'J'+str(k)+''+stri 
+                    setattr( Jets1, strTemp , getattr(oldTree.Jets[k],stri) )
+ 
+                #for stri in attr:
+                #    setattr( Jets1 , stri , getattr(oldTree.Jets[k],stri) ) 
                 
-                setattr( Jets1 , 'DisplacedJetsTriggerBool' , DisplacedJetsTriggerBool )
-                setattr( Jets1 , 'nCHSJets'                 , nCHSJets )
-
+                #setattr( Jets1 , 'DisplacedJetsTriggerBool' , DisplacedJetsTriggerBool )
+                #setattr( Jets1 , 'nCHSJets'                 , nCHSJets )
                 newTree.Fill()    
 
                     
         elif lola_on == 1:
-
-            if NumOfVecEl == 5:
-                attr_out = forLolaFive.attrTypeList
-                for ii in range(forLolaFive.nConstit):
-                    for strO in attr_out:
-                        tempAttrStrO = 'pfc' + str(ii+1) + '_' + strO
-                        tempAttrStrI =  forLolaFive.attrNameDic[strO] + '_' + str(ii+1)
-                        setattr( Jets1 , tempAttrStrO , jet1[tempAttrStrI][i] )
-
-            elif NumOfVecEl == 6:
-                attr_out = forLolaSix.attrTypeList 
-                for ii in range(forLolaSix.nConstit):  
-                    for strO in attr_out:
-                        tempAttrStrO = 'pfc' + str(ii+1) + '_' + strO
-                        tempAttrStrI =  forLolaSix.attrNameDic[strO] + '_' + str(ii+1)
-                        setattr( Jets1 , tempAttrStrO , jet1[tempAttrStrI][i] )
-
-
-        #newTree.Fill()
+            
+            for ii in range(forLola.nConstit):
+                for strO in attr_out:
+                    tempAttrStrO = 'pfc' + str(ii+1) + '_' + strO
+                    tempAttrStrI =  forLola.attrNameDic[strO] + '_' + str(ii+1)
+                    setattr( Jets1 , tempAttrStrO , jet1[tempAttrStrI][i] )
+            newTree.Fill()
 
 
         #########################################################  

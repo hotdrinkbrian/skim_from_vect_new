@@ -1,29 +1,37 @@
+from samples import *
+
+
 
 class structure:
 
-    def __init__(self, model='bdt', imageOn=0, nConstit=40, dimOfVect=4, preStr='pfc'):
+    def __init__(self, model='bdt', imageOn=0, nConstit=40, dimOfVect=4, preStr='pfc',extraDict={}):
         self.model = model
         self.kinList     = ['pt','mass','energy']
         self.preList     = ['pt','eta','phi','mass','energy']
         self.defaultType = 'float'
         self.preStr      = preStr
         self.typTransDic = {'float':'F','int':'I'}
-        self.attrNameDic = {'energy': 'E','px':'PX','py':'PY','pz':'PZ','ifTrack':'C','pType':'PID'}
-
+        self.attrNameDic = {'energy': 'E','px':'PX','py':'PY','pz':'PZ','ifTrack':'C','pType':'PID','pt':'pt','eta':'eta','phi':'phi','mass':'mass'}
+        
 
         if self.model == 'bdt':
             self.imageOn      = 0
-            self.defaultValue = -1.
-            #self.attrList     = ['cHadE','nHadE','cHadEFrac','nHadEFrac','nEmE','nEmEFrac','cEmE','cEmEFrac','cmuE','cmuEFrac','muE','muEFrac','eleE','eleEFrac','eleMulti','photonE','photonEFrac','photonMulti','cHadMulti','nHadMulti','npr','cMulti','nMulti','FracCal']
-            self.attrList     = ['cHadEFrac','nHadEFrac','nEmEFrac','cEmEFrac','cmuEFrac','muEFrac','eleEFrac','eleMulti','photonEFrac','photonMulti','cHadMulti','nHadMulti','npr','cMulti','nMulti']
- 
-            self.attrDict     = {}
+            self.nConstit     = nConstit
+            self.defaultValue = -1. 
+            self.attrTypeList = attrList
+            self.attrTypeDict = {}
+  
+            if extraDict:
+                for strj, dataTypeJ in extraDict.iteritems():
+                    self.attrTypeList.append(strj)
+     
+            for oji in self.attrTypeList:
+                    self.attrNameDic[oji] = oji
 
-            for stri in self.attrList:
-                self.attrDict[stri] = {}
-                self.attrDict[stri]['Type'] = self.defaultType
-                self.attrDict[stri]['defaultValue'] = self.defaultValue
-
+            for stri in self.preList + self.attrTypeList:
+                self.setAttrDict(stri)#self.setAttrList(stri)
+           
+         
         elif self.model == 'lola':
             self.imageOn      = imageOn
             self.nConstit     = nConstit
@@ -55,7 +63,7 @@ class structure:
 
     def setDefaultValue(self,newDict):
             for stri in newDict:
-                self.attrDict[stri]['defaultValue'] = newDict[stri]
+                self.attrTypeDict[stri]['defaultValue'] = newDict[stri]
 
 
     def setType(self,newDict):
@@ -63,18 +71,26 @@ class structure:
                 if newDict[stri] not in ['float','int']:
                     print '__________________The given type is not valid!'
                 else:
-                    self.attrDict[stri]['Type'] = newDict[stri]
+                    self.attrTypeDict[stri]['Type'] = newDict[stri]
 
 
-    def branchLeafStrGen(self,extraDict):
+
+
+    def branchLeafStrGen(self):
         strTrain = ''
-
         if self.model == 'bdt':
-            for stri in self.preList:
-                strTrain += stri + '/' + 'F' + ':'
-            for stri in self.attrList:
-                tempType = self.typTransDic[ self.attrDict[stri]['Type'] ]
-                strTrain += stri + '/' + tempType + ':'
+            if self.nConstit:
+                for i in range(self.nConstit):
+                    tL = self.preList + self.attrTypeList
+                    for stri in tL:
+                        tempType = self.typTransDic[ self.attrTypeDict[stri]['Type'] ]
+                        strTrain += self.preStr + str(i+1) + '' + stri + '/' + tempType + ':'
+            else:
+                for stri in self.preList:
+                    strTrain += stri + '/' + 'F' + ':'
+                for stri in self.attrTypeList:
+                    tempType = self.typTransDic[ self.attrTypeDict[stri]['Type'] ]
+                    strTrain += stri + '/' + tempType + ':'
 
         elif self.model == 'lola':            
             for i in range(self.nConstit):
@@ -82,9 +98,6 @@ class structure:
                     tempType = self.typTransDic[ self.attrTypeDict[stri]['Type'] ] 
                     strTrain += self.preStr + str(i+1) + '_' + stri + '/' + tempType + ':'
 
-        if bool(extraDict):
-            for strj, dataTypeJ in extraDict.iteritems():
-                strTrain += strj + '/' + dataTypeJ + ':'
 
         self.branchLeafStr = strTrain[:-1]
         
@@ -98,18 +111,35 @@ class structure:
         self.panColNameList = panColNameList
 
 
-    def setAttrList(self,inStr):
-        self.attrList = inStr
-        self.attrDict = {}
-        for stri in self.attrList:
-                self.attrDict[stri]                 = {}
-                self.attrDict[stri]['Type']         = self.defaultType
-                self.attrDict[stri]['defaultValue'] = -1.
-    
+    def setAttrDict(self,inStr):#setAttrList(self,inStr):
+        #if inStr not in self.attrTypeList:
+        #    self.attrTypeList.append(inStr)
+        if inStr not in self.attrTypeDict:
+            self.attrTypeDict[inStr]                 = {}
+            self.attrTypeDict[inStr]['Type']         = self.defaultType
+            self.attrTypeDict[inStr]['defaultValue'] = self.defaultValue
+     
         
 
 
 
+
+
+
+
+
+
+if __name__ == '__main__':
+
+    extra = {'trigger':'F'}
+    testStruct = structure(model='bdt',nConstit=3,preStr='J',extraDict=extra)
+    testStruct.panColNameListGen()
+    testStruct.branchLeafStrGen()
+
+    print testStruct.branchLeafStr
+    print testStruct.attrTypeList
+    print testStruct.attrNameDic
+    
 
 
 
