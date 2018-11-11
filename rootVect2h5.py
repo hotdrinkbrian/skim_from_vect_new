@@ -7,9 +7,8 @@ import math
 import argparse
 from array import array
 import pandas as pd
-from tools import ptrank, padd
+from tools import ptrank, padd, showTimeLeft
 from templates import *
-from timeit import default_timer as timer
 from ROOT import ROOT, gROOT, TDirectory, TFile, gFile, TBranch, TLeaf, TTree
 from ROOT import AddressOf
 pwd = os.popen('pwd').read()
@@ -21,14 +20,12 @@ Js = JetType()
 
 
 
-
-
-
-
+#################
+# settings      #
+#################
 path               = '/beegfs/desy/user/hezhiyua/backed/fromLisa/fromLisaLLP//'
 #path              = '/beegfs/desy/user/hezhiyua/backed/dustData/'+'crab_folder_v2/'#'/home/brian/datas/roottest/'
 #inName            = 'VBFH_HToSSTobbbb_MH-125_MS-40_ctauS-500_jetOnly.root'
-
 num_of_jets           = 3#1#4
 DisplacedJets_Trigger = 0#1
 testOn                = 0
@@ -39,23 +36,19 @@ NumOfVecEl            = 6
 Npfc                  = 40
 #scanDepth            = 44
 vectName              = 'MatchedCHSJet1' #'Jets'
-
 #adjusted for different oldfile location
-#args1       = '/beegfs/desy/user/hezhiyua/2bBacked/skimmed/withNonLeadingJets/'
-args1       = '/beegfs/desy/user/hezhiyua/2bBacked/skimmed/withNonLeadingJets/'
+path_out    = '/beegfs/desy/user/hezhiyua/2bBacked/skimmed/withNonLeadingJets/'
 versionN_b  = 'TuneCUETP8M1_13TeV-madgraphMLM-pythia8-v1'
 versionN_s  = 'TuneCUETP8M1_13TeV-powheg-pythia8_PRIVATE-MC'
 HT          = '50'
-fn          = ''
-newFileName = fn.replace('.root','_skimed.root')
 lola_on     = 0 # 1: prepared for lola
 ct_dep      = 0 #1 for ct dependence comparison
 cut_on      = 1#1
 life_time   = ['500'] #['0','0p1','0p05','1','5','10','25','50','100','500','1000','2000','5000','10000']
-
 treeName    = 'tree44'
 JetName     = 'Jet1s'
-
+fn          = ''
+newFileName = ''#fn.replace('.root','_skimed.root')
 
 len_of_lt = len(life_time)
 
@@ -65,14 +58,13 @@ pars.add_argument('-s'      ,action='store',type=int,help='specify if for VBF fi
 pars.add_argument('--model' ,action='store',type=str,help='specify model')
 pars.add_argument('-t'      ,action='store',type=int,help='specify if to do test')
 pars.add_argument('--mass'  ,action='store',type=int,help='specify signal mass')
-pars.add_argument('--nj'  ,action='store',type=int,help='specify number of jets')
+pars.add_argument('--nj'    ,action='store',type=int,help='specify number of jets')
 args = pars.parse_args()
-if args.ht:
-    HT = str( args.ht ) 
-if args.s:
-    ct_dep = args.s
-if args.t:
-    testOn = 1
+if args.ht  :    HT = str( args.ht ) 
+if args.s   :    ct_dep = args.s
+if args.t   :    testOn = 1
+if args.mass:    sgn_mass    = args.mass
+if args.nj  :    num_of_jets = args.nj
 
 if   args.model == 'bdt':
     lola_on    = 0
@@ -83,44 +75,24 @@ elif args.model == 'lola6':
     lola_on    = 1
     NumOfVecEl = 6
 
-if args.mass:
-    sgn_mass    = args.mass
-if args.nj:
-    num_of_jets = args.nj
-    
-
-
 
 forBDT    = structure(model='bdt' , nConstit=num_of_jets, preStr='J'          )
 forLola   = structure(model='lola', nConstit=40         , dimOfVect=NumOfVecEl)
-
 forBDT.Objh()
 #forLola.Objh()
 
 
 if   ct_dep == 0:
     matchOn = 0
-    if   '50'  == HT:
-        channel = {'QCD':'QCD_HT50to100_'  + versionN_b + '.root'}
-    elif '100' == HT:
-        channel = {'QCD':'QCD_HT100to200_' + versionN_b + '.root'}
-    elif '200' == HT:
-        channel = {'QCD':'QCD_HT200to300_' + versionN_b + '.root'}
-    elif '300' == HT:
-        channel = {'QCD':'QCD_HT300to500_' + versionN_b + '.root'}
-
-    elif '500' == HT:
-        channel = {'QCD':'QCD_HT500to700_'   + versionN_b + '.root'}
-    elif '700' == HT:
-        channel = {'QCD':'QCD_HT700to1000_'  + versionN_b + '.root'}
-    elif '1000' == HT:
-        channel = {'QCD':'QCD_HT1000to1500_' + versionN_b + '.root'}
-    elif '1500' == HT:
-        channel = {'QCD':'QCD_HT1500to2000_' + versionN_b + '.root'}
-    elif '2000' == HT:
-        channel = {'QCD':'QCD_HT2000toInf_'  + versionN_b + '.root'}
-
-
+    if   '50'  == HT: channel = {'QCD':'QCD_HT50to100_'  + versionN_b + '.root'}
+    elif '100' == HT: channel = {'QCD':'QCD_HT100to200_' + versionN_b + '.root'}
+    elif '200' == HT: channel = {'QCD':'QCD_HT200to300_' + versionN_b + '.root'}
+    elif '300' == HT: channel = {'QCD':'QCD_HT300to500_' + versionN_b + '.root'}
+    elif '500'  == HT: channel = {'QCD':'QCD_HT500to700_'   + versionN_b + '.root'}
+    elif '700'  == HT: channel = {'QCD':'QCD_HT700to1000_'  + versionN_b + '.root'}
+    elif '1000' == HT: channel = {'QCD':'QCD_HT1000to1500_' + versionN_b + '.root'}
+    elif '1500' == HT: channel = {'QCD':'QCD_HT1500to2000_' + versionN_b + '.root'}
+    elif '2000' == HT: channel = {'QCD':'QCD_HT2000toInf_'  + versionN_b + '.root'}
 elif ct_dep == 1:
     matchOn = 1
     channel = {}
@@ -157,10 +129,8 @@ if matchOn == 1:
     condition_str = condition_str +\
                     a +\
                     '(' + prs + cs['matched']  + ')'
-if   cut_on == 1:
-    print condition_str
-elif cut_on == 0:
-    print 'no cut applied~'
+if   cut_on == 1: print '\nCuts:\n',condition_str
+elif cut_on == 0: print 'no cut applied~'
 #---------------------------------------------------------------------------------------------------------------------------------
 #######################################
 if   nonLeadingJetsOn == 0:
@@ -184,17 +154,15 @@ if lola_on == 1:
     t1 = f1.Get('ntuple/tree')
 
     NumE = t1.GetEntriesFast()
-    print NumE
+    print '\nEntries: ', NumE
     t1.SetBranchAddress( vectName , AddressOf(Js, 'pt') )
 
     b1 = t1.GetBranch('PFCandidates')
     nEntries = b1.GetEntries()
 
-
     if testOn == 0: 
         numOfEntriesToScan = nEntries
-        if nEntries > 1000000:
-            numOfEntriesToScan = 1000000 
+        if nEntries > 1000000:        numOfEntriesToScan = 1000000 
 
     nr = 0
     for entry in t1:
@@ -220,7 +188,7 @@ if lola_on == 1:
         j1M       = [] 
         scanDepth = E.GetNdata()
 
-        for num in range(0,scanDepth):
+        for num in xrange(0,scanDepth):
             if jetInd.GetValue(num,1) == 0:  #0,1
                 j1Entry.append(nr) 
                 #j1Num.append(num)
@@ -270,21 +238,13 @@ if lola_on == 1:
 
         pan.append(tt)
         
-        if nr == numOfEntriesToScan:
-            break     
+        if nr == numOfEntriesToScan: break     
 
     print 'num of entries: ' + str(nEntries)   
-
     forLola.panColNameListGen()
     colN = forLola.panColNameList
 
-
     jet1 = pd.DataFrame(pan, columns=colN)  
-
-
-
-
-
 
 
 #########################
@@ -298,105 +258,76 @@ if lola_on == 1:
 
 #-----------------------------------------------------------------------------------------------------------
 def skim_c( name , newFileName ):
-    #--------------------------------
-    Jet_old_dict = {}
-    #for j in range(num_of_jets):
-    #    Jet_old_dict[j+1] = JetType()
-    #Jet_old_dict[1] = JetType()
-    #--------------------------------
-    oldFile = TFile(name, "READ")
-    oldTree = oldFile.Get("ntuple/tree") 
-    NofEntries = oldTree.GetEntriesFast()
-    numOfEntriesToScan_local = NofEntries
-    if NofEntries > nLimit:
-        numOfEntriesToScan_local = nLimit
-    if testOn == 1:
-        numOfEntriesToScan_local = numOfEntriesToScan  
+    oldFile                   = TFile(name, "READ")
+    oldTree                   = oldFile.Get("ntuple/tree") 
+    NofEntries                = oldTree.GetEntriesFast()
+    numOfEntriesToScan_local  = NofEntries
+    if NofEntries > nLimit:   numOfEntriesToScan_local = nLimit
+    if testOn == 1:           numOfEntriesToScan_local = numOfEntriesToScan  
     #locate and register the Jet branches of the old ttree
-    print 'skimming file',oldFile.GetName(),'\tevents =',oldTree.GetEntries(),'\tweight =',oldTree.GetWeight()
-    print 'filename:', name
-    newFile = TFile('Skim/' + newFileName, "RECREATE")
+    print '\nskimming file',oldFile.GetName(),'\tevents =',oldTree.GetEntries(),'\tweight =',oldTree.GetWeight(),'\n'
+    newFile = TFile(newFileName, "RECREATE") #('Skim/' + newFileName, "RECREATE")
     newFile.cd()
     newTree = TTree(treeName, treeName)
 
     if   lola_on == 0:
         forBDT.branchLeafStrGen()
         newTree.Branch( JetName, Jets1, forBDT.branchLeafStr )
-
-
     elif lola_on == 1:
         forLola.branchLeafStrGen() 
         newTree.Branch( JetName, Jets1, forLola.branchLeafStr )
-
-
-
     # this attribute list must exactly match (the order of) the features in the header file!!!! 
-
-    
-    
+        
     attr     = forBDT.preList + forBDT.attrTypeList
     attr_out = forLola.attrTypeList
-    
-    ti = 80000
+    startTemp=0   
     #theweight = oldTree.GetWeight() 
-    for i in range(  0 , numOfEntriesToScan_local  ):    
-        if      i == 0:
-            start = timer()
-        elif i%ti == 2:
-            start = timer()
-        
+    for i in xrange(0, numOfEntriesToScan_local):    
+        start     = showTimeLeft(ii=i,mode='s',startTime=startTemp)
+        startTemp = start
+
         oldTree.GetEntry(i)
         # selections
         # Trigger
        
         if DisplacedJets_Trigger:
-            if not eval( DisplacedJets_Trigger_str ): continue 
- 
+            if not eval( DisplacedJets_Trigger_str ): continue
         #####################################  
         DisplacedJetsTriggerBool = -1.
-        if eval( DisplacedJets_Trigger_str ):
-            DisplacedJetsTriggerBool = 1.
-        else: 
-            DisplacedJetsTriggerBool = 0.  
+        if eval( DisplacedJets_Trigger_str ): DisplacedJetsTriggerBool = 1.
+        else                                : DisplacedJetsTriggerBool = 0.  
         ##################################### 
-        #nCHSJets = -1. 
-        #####################################
       
         if lola_on == 0:      
             passB = 0
             for k in xrange( oldTree.Jets.size() ):
 
-                if num_of_jets == 1: 
-                    if not eval(whichJetStr): continue
-                else:
+                if num_of_jets == 1:
+                    if not eval(whichJetStr)        : continue
+                else               :  
                     if not (k>=1 and k<=num_of_jets): continue 
                 
                 if cut_on == 1:                       
                     if not eval( condition_str ): 
                         for stri in attr:
                             strTemp = 'J'+str(k)+''+stri 
-                            if   stri == 'eta' or stri == 'phi':
-                                dfv = -9.    
-                            else:
-                                dfv = -1.  
+                            if   stri == 'eta' or stri == 'phi': dfv = -9.    
+                            else                               : dfv = -1.  
                             setattr( Jets1, strTemp , dfv ) 
                         continue    
                     
                 passB = 1 
                 for stri in attr:
                     strTemp = 'J'+str(k)+''+stri 
-                    if   stri != 'DisplacedJetsTriggerBool':
-                        fillingValue = getattr(oldTree.Jets[k],stri) 
-                    elif stri == 'DisplacedJetsTriggerBool':
-                        fillingValue = DisplacedJetsTriggerBool        
+                    if   stri != 'DisplacedJetsTriggerBool':  fillingValue = getattr(oldTree.Jets[k],stri) 
+                    elif stri == 'DisplacedJetsTriggerBool':  fillingValue = DisplacedJetsTriggerBool        
                     setattr( Jets1 , strTemp , fillingValue )                
             if passB == 1:
                 newTree.Fill()    
 
                     
         elif lola_on == 1:
-            
-            for ii in range(forLola.nConstit):
+            for ii in xrange(forLola.nConstit):
                 for strO in attr_out:
                     tempAttrStrO = 'pfc' + str(ii+1) + '_' + strO
                     tempAttrStrI =  forLola.attrNameDic[strO] + '_' + str(ii+1)
@@ -404,21 +335,10 @@ def skim_c( name , newFileName ):
             #!!!!!!!!!!!!!!!!!!!!deal with the empty value situation!!!!!!!!!!!!!!!!!!!!!!
             newTree.Fill()
 
+         
+        showTimeLeft(ii=i,mode='e',startTime=start,numOfJobs=numOfEntriesToScan_local)  
 
-        #########################################################  
-        if i%ti == 1 and i>ti: 
-            end = timer() 
-            dt = end-start
-            tl = int( ((numOfEntriesToScan_local-i)/ti ) * dt ) #NofEntries
-            if tl > 60:
-                sys.stdout.write("\r" + 'time left: ' + str( tl/60 ) + 'min' )
-                sys.stdout.flush()
-            else: 
-                sys.stdout.write("\r" + 'time left: ' + 'less than 1 min')
-                sys.stdout.flush() 
-        #########################################################
-
-    print 'produced skimmed file',newFile.GetName(),'\tevents =',newTree.GetEntries(),'\tweight =',newTree.GetWeight()
+    print '\nproduced skimmed file',newFile.GetName(),'\tevents =',newTree.GetEntries(),'\tweight =',newTree.GetWeight()
     newFile.cd()
     newFile.Write()
     newFile.Close() 
@@ -427,10 +347,8 @@ def skim_c( name , newFileName ):
 #-----------===============================
 def skim(names): 
     for cc in channel:
-        if 'QCD' in channel[cc]:
-            nFn = channel[cc].replace('.root','_' + str(num_of_jets) + 'j_skimed.root')
-        elif 'ctauS' in channel[cc]:
-            nFn = channel[cc].replace('.root','_' + str(num_of_jets) + 'j_skimed.root') #('.root','_4mj_skimed.root')
+        if   'QCD'   in channel[cc]: nFn = channel[cc].replace('.root','_' + str(num_of_jets) + 'j_skimed.root')
+        elif 'ctauS' in channel[cc]: nFn = channel[cc].replace('.root','_' + str(num_of_jets) + 'j_skimed.root') 
         ss = path + channel[cc]    
         #skim_c(ss,nFn)
         pi = mp.Process(target=skim_c, args=(ss,nFn))
@@ -438,9 +356,8 @@ def skim(names):
 #-----------===============================
 
 #=====================================================================================================
-os.chdir(args1)
-if not os.path.isdir('Skim'): os.mkdir('Skim')
-
+os.chdir(path_out)
+#if not os.path.isdir('Skim'): os.mkdir('Skim')
 p = mp.Process(target=skim, args=(fn,))
 p.start()
 #=====================================================================================================
@@ -454,7 +371,7 @@ p.start()
 
 #_____________________________________________old lines:
 """
-    for j in range(num_of_jets):
+    for j in xrange(num_of_jets):
         if 'QCD' in name:
             #oldTree.SetBranchAddress( 'Jets' , AddressOf(Jet_old_dict[j+1], 'pt') )
             #oldTree.SetBranchAddress( 'MatchedCHSJet' + str(j+1) , AddressOf(Jet_old_dict[j+1], 'pt') )
@@ -462,6 +379,13 @@ p.start()
             #oldTree.SetBranchAddress( 'MatchedCHSJet' + str(j+1) , AddressOf(Jet_old_dict[j+1], 'pt') )
             #oldTree.SetBranchAddress( 'Jets' , AddressOf(Jet_old_dict[j+1], 'pt') )
 """ 
+
+#--------------------------------
+#Jet_old_dict = {}
+#for j in xrange(num_of_jets):
+#    Jet_old_dict[j+1] = JetType()
+#Jet_old_dict[1] = JetType()
+#--------------------------------
 
 """
                 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~nan problem to be solved!      
@@ -476,7 +400,6 @@ p.start()
                     Jets1.FracCal    = 400.
                 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~nan problem to be solved!
 """
-
 
 """
 ###################################################################################################################

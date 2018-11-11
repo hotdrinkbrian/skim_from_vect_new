@@ -14,7 +14,6 @@ def writeObjh(attrDict,attrList,structName = 'JetTypeSmall'):
     attrS = attrS[:-2] 
     
     
-    
     #with open(path_Obj + objhName,'w+') as fo:
     with open(path_Obj + objhName,'r') as fo:
         linesList    = fo.readlines()
@@ -35,11 +34,9 @@ def writeObjh(attrDict,attrList,structName = 'JetTypeSmall'):
                         else:
                             print 'No }; found, please check..'
                             exit()
-          
             elif endStr in i[1]:
                 cutPosition = i[0]
-                
-        
+                    
         newLines = []
         newLines.append('\n\n\n'+sStr+'\n'+structName+'():\n')    
         newLines.append(attrS) 
@@ -47,8 +44,7 @@ def writeObjh(attrDict,attrList,structName = 'JetTypeSmall'):
         for stri in attrList:
             newLines.append('    ' + attrDict[stri]['Type'] + ' ' + stri + ';\n') 
         newLines.append('\n};\n\n\n') 
-    
-        print newLines
+        #print newLines
     
         if cP2:
             linesList1   = linesListNew[:cP1] + ['\n/*\n']
@@ -62,7 +58,6 @@ def writeObjh(attrDict,attrList,structName = 'JetTypeSmall'):
             linesListNew = linesList1 + newLines + linesList2
     
         #fo.writelines( linesListNew )
-         
     
     with open(path_Obj + objhName,'w') as ff:    
         ff.writelines( linesListNew )
