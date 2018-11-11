@@ -29,7 +29,7 @@ path               = '/beegfs/desy/user/hezhiyua/backed/fromLisa/fromLisaLLP//'
 #path              = '/beegfs/desy/user/hezhiyua/backed/dustData/'+'crab_folder_v2/'#'/home/brian/datas/roottest/'
 #inName            = 'VBFH_HToSSTobbbb_MH-125_MS-40_ctauS-500_jetOnly.root'
 
-num_of_jets           = 1 #4
+num_of_jets           = 3#1#4
 DisplacedJets_Trigger = 0#1
 testOn                = 0
 nonLeadingJetsOn      = 0#1
@@ -56,11 +56,6 @@ life_time   = ['500'] #['0','0p1','0p05','1','5','10','25','50','100','500','100
 treeName    = 'tree44'
 JetName     = 'Jet1s'
 
-extraDic = {}
-extraDic = {
-             'DisplacedJetsTriggerBool':'F',
-             #'nCHSJets'                :'F', 
-                                             }
 
 len_of_lt = len(life_time)
 
@@ -70,6 +65,7 @@ pars.add_argument('-s'      ,action='store',type=int,help='specify if for VBF fi
 pars.add_argument('--model' ,action='store',type=str,help='specify model')
 pars.add_argument('-t'      ,action='store',type=int,help='specify if to do test')
 pars.add_argument('--mass'  ,action='store',type=int,help='specify signal mass')
+pars.add_argument('--nj'  ,action='store',type=int,help='specify number of jets')
 args = pars.parse_args()
 if args.ht:
     HT = str( args.ht ) 
@@ -88,16 +84,18 @@ elif args.model == 'lola6':
     NumOfVecEl = 6
 
 if args.mass:
-    sgn_mass = args.mass
+    sgn_mass    = args.mass
+if args.nj:
+    num_of_jets = args.nj
     
 
 
 
-forBDT    = structure(model='bdt' , nConstit=num_of_jets, preStr='J'          , extraDict=extraDic)
-forLola   = structure(model='lola', nConstit=40         , dimOfVect=NumOfVecEl, extraDict=extraDic)
+forBDT    = structure(model='bdt' , nConstit=num_of_jets, preStr='J'          )
+forLola   = structure(model='lola', nConstit=40         , dimOfVect=NumOfVecEl)
 
-
-
+forBDT.Objh()
+#forLola.Objh()
 
 
 if   ct_dep == 0:
@@ -302,8 +300,9 @@ if lola_on == 1:
 def skim_c( name , newFileName ):
     #--------------------------------
     Jet_old_dict = {}
-    for j in range(num_of_jets):
-        Jet_old_dict[j+1] = JetType()
+    #for j in range(num_of_jets):
+    #    Jet_old_dict[j+1] = JetType()
+    #Jet_old_dict[1] = JetType()
     #--------------------------------
     oldFile = TFile(name, "READ")
     oldTree = oldFile.Get("ntuple/tree") 
@@ -364,28 +363,34 @@ def skim_c( name , newFileName ):
         #####################################
       
         if lola_on == 0:      
-     
+            passB = 0
             for k in xrange( oldTree.Jets.size() ):
 
                 if num_of_jets == 1: 
                     if not eval(whichJetStr): continue
                 else:
                     if not (k>=1 and k<=num_of_jets): continue 
-      
+                
                 if cut_on == 1:                       
-                    if not eval( condition_str ): continue    
-
-                #nCHSJets = oldTree.Jets.size() 
-
+                    if not eval( condition_str ): 
+                        for stri in attr:
+                            strTemp = 'J'+str(k)+''+stri 
+                            if   stri == 'eta' or stri == 'phi':
+                                dfv = -9.    
+                            else:
+                                dfv = -1.  
+                            setattr( Jets1, strTemp , dfv ) 
+                        continue    
+                    
+                passB = 1 
                 for stri in attr:
                     strTemp = 'J'+str(k)+''+stri 
-                    setattr( Jets1, strTemp , getattr(oldTree.Jets[k],stri) )
- 
-                #for stri in attr:
-                #    setattr( Jets1 , stri , getattr(oldTree.Jets[k],stri) ) 
-                
-                #setattr( Jets1 , 'DisplacedJetsTriggerBool' , DisplacedJetsTriggerBool )
-                #setattr( Jets1 , 'nCHSJets'                 , nCHSJets )
+                    if   stri != 'DisplacedJetsTriggerBool':
+                        fillingValue = getattr(oldTree.Jets[k],stri) 
+                    elif stri == 'DisplacedJetsTriggerBool':
+                        fillingValue = DisplacedJetsTriggerBool        
+                    setattr( Jets1 , strTemp , fillingValue )                
+            if passB == 1:
                 newTree.Fill()    
 
                     
@@ -396,6 +401,7 @@ def skim_c( name , newFileName ):
                     tempAttrStrO = 'pfc' + str(ii+1) + '_' + strO
                     tempAttrStrI =  forLola.attrNameDic[strO] + '_' + str(ii+1)
                     setattr( Jets1 , tempAttrStrO , jet1[tempAttrStrI][i] )
+            #!!!!!!!!!!!!!!!!!!!!deal with the empty value situation!!!!!!!!!!!!!!!!!!!!!!
             newTree.Fill()
 
 

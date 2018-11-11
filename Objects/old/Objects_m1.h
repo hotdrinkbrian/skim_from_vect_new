@@ -39,8 +39,6 @@ JetTypeSmall(): pt(-1.), eta(-9.), phi(-9.), mass(-1.), energy(-1.), cHadE(-1.),
 */
 
 
-
-/*
 struct JetTypeSmall {
 JetTypeSmall(): pt(-1.), eta(-9.), phi(-9.), mass(-1.), energy(-1.), cHadEFrac(-1.), nHadEFrac(-1.), nEmEFrac(-1.), cEmEFrac(-1.), cmuEFrac(-1.), muEFrac(-1.), eleEFrac(-1.), eleMulti(-1.), photonEFrac(-1.), photonMulti(-1.), cHadMulti(-1.), nHadMulti(-1.), npr(-1.), cMulti(-1.), nMulti(-1.),   DisplacedJetsTriggerBool(-1.), nCHSJets(-1.){}
     float pt;
@@ -77,8 +75,6 @@ JetTypeSmall(): pt(-1.), eta(-9.), phi(-9.), mass(-1.), energy(-1.), cHadEFrac(-
     float DisplacedJetsTriggerBool; 
     float nCHSJets;
 };
-*/
-
 
 
 
@@ -861,170 +857,6 @@ JetType(): pt(-1.), eta(-9.), phi(-9.), mass(-1.), energy(-1.), ptRaw(-1.), ptUn
 
 
 
-
-
-
-
-
-
-/*
-struct JetTypeSmall {
-JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
-{}
-    float J1pt;
-    float J1eta;
-    float J1phi;
-    float J1mass;
-    float J1energy;
-    float J1cHadEFrac;
-    float J1nHadEFrac;
-    float J1cMulti;
-    float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
-
-};
-*/
-
-
-
-
-
-
-
-/*
-struct JetTypeSmall {
-JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
-{}
-    float J1pt;
-    float J1eta;
-    float J1phi;
-    float J1mass;
-    float J1energy;
-    float J1cHadEFrac;
-    float J1nHadEFrac;
-    float J1cMulti;
-    float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
-
-};
-*/
-
-
-
-
-
-
-
-/*
-struct JetTypeSmall {
-JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
-{}
-    float J1pt;
-    float J1eta;
-    float J1phi;
-    float J1mass;
-    float J1energy;
-    float J1cHadEFrac;
-    float J1nHadEFrac;
-    float J1cMulti;
-    float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
-
-};
-*/
-
-
-
-
-
-
-struct JetTypeSmall {
-JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
-{}
-    float J1pt;
-    float J1eta;
-    float J1phi;
-    float J1mass;
-    float J1energy;
-    float J1cHadEFrac;
-    float J1nHadEFrac;
-    float J1cMulti;
-    float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
-
-};
 
 
 #endif

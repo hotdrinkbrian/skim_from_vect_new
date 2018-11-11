@@ -1,10 +1,13 @@
 from samples import *
 
+import sys
+sys.path.append('../Tools/')
+from remakeObjh import writeObjh 
 
 
 class structure:
 
-    def __init__(self, model='bdt', imageOn=0, nConstit=40, dimOfVect=4, preStr='pfc',extraDict={}):
+    def __init__(self, model='bdt', imageOn=0, nConstit=40, dimOfVect=4, preStr='pfc',extraDict=extraDic):
         self.model = model
         self.kinList     = ['pt','mass','energy']
         self.preList     = ['pt','eta','phi','mass','energy']
@@ -18,8 +21,9 @@ class structure:
             self.imageOn      = 0
             self.nConstit     = nConstit
             self.defaultValue = -1. 
-            self.attrTypeList = attrList
+            self.attrTypeList = attrList   
             self.attrTypeDict = {}
+            self.structName   = 'JetTypeSmall'
   
             if extraDict:
                 for strj, dataTypeJ in extraDict.iteritems():
@@ -46,11 +50,13 @@ class structure:
                 self.attrTypeDict[stri]['defaultValue'] = self.defaultValue
                 
             if self.dimOfVect == 5:
+                self.structName                              = 'JetTypePFC_fiveVect' 
                 self.attrTypeList.append( 'ifTrack' )
                 self.attrTypeDict['ifTrack']                 = {}
                 self.attrTypeDict['ifTrack']['Type']         = 'int'
                 self.attrTypeDict['ifTrack']['defaultValue'] = -1
             elif self.dimOfVect == 6:
+                self.structName                              = 'JetTypePFC_sixVect' 
                 self.attrTypeList.append( 'ifTrack' )
                 self.attrTypeList.append( 'pType' )
                 self.attrTypeDict['ifTrack']                 = {}
@@ -59,21 +65,56 @@ class structure:
                 self.attrTypeDict['ifTrack']['defaultValue'] = -1
                 self.attrTypeDict['pType']['Type']           = 'int'
                 self.attrTypeDict['pType']['defaultValue']   = 0                        
+        
+        self.objhListGen()  
+        #writeObjh( self.preList + self.attrTypeList )
 
 
     def setDefaultValue(self,newDict):
-            for stri in newDict:
-                self.attrTypeDict[stri]['defaultValue'] = newDict[stri]
+        for stri in newDict:
+            self.attrTypeDict[stri]['defaultValue'] = newDict[stri]
 
 
     def setType(self,newDict):
-            for stri in newDict:
-                if newDict[stri] not in ['float','int']:
-                    print '__________________The given type is not valid!'
-                else:
-                    self.attrTypeDict[stri]['Type'] = newDict[stri]
+        for stri in newDict:
+            if newDict[stri] not in ['float','int']:
+                print '__________________The given type is not valid!'
+            else:
+                self.attrTypeDict[stri]['Type'] = newDict[stri]
 
 
+
+    def objhListGen(self):
+        objhDict = {}
+        objhList = []
+        tL = self.preList + self.attrTypeList
+        if self.model == 'bdt':
+            if self.nConstit:
+                for i in range(self.nConstit):
+                    for stri in tL:
+                        tempStr  = self.preStr + str(i+1) + '' + stri    
+                        tempType = self.attrTypeDict[stri]['Type'] 
+                        objhList.append( tempStr )
+                        objhDict[tempStr] = {}
+                        objhDict[tempStr]['Type'] = tempType
+            else: 
+                objhList = tL        
+
+        elif self.model == 'lola':
+            for i in range(self.nConstit):
+                for stri in self.attrTypeList:
+                    tempStr  =  self.preStr + str(i+1) + '_' + stri  
+                    tempType = self.attrTypeDict[stri]['Type'] 
+                    objhList.append( tempStr ) 
+                    objhDict[tempStr] = {}
+                    objhDict[tempStr]['Type'] = tempType
+
+        self.objhDict = objhDict
+        self.objhList = objhList
+     
+
+    def Objh(self):
+        writeObjh( attrDict=self.objhDict , attrList=self.objhList , structName = self.structName )
 
 
     def branchLeafStrGen(self):
