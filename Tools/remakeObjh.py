@@ -29,13 +29,11 @@ def writeObjh(attrDict,attrList,structName = 'JetTypeSmall'):
                         if '};' in linesList[cc]:
                             cP2 = cc
                             break
-                        elif cc<nLines:
-                            cc += 1
+                        elif cc<nLines:    cc += 1
                         else:
                             print 'No }; found, please check..'
                             exit()
-            elif endStr in i[1]:
-                cutPosition = i[0]
+            elif endStr in i[1]:    cutPosition = i[0]
                     
         newLines = []
         newLines.append('\n\n\n'+sStr+'\n'+structName+'():\n')    

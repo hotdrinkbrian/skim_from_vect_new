@@ -58,7 +58,7 @@ def padd(V, default = 0, n_pfc = 40):
 
 
 #=================================================showTimeLeft
-def showTimeLeft(ii,mode='s',startTime=0,numOfJobs=0,bigNum=800): #80000
+def showTimeLeft(ii,mode='s',startTime=0,numOfJobs=0,bigNum=80000): 
     if   mode == 'e':
         if ii%bigNum == 1 and ii>bigNum:
             endTime = time.time()

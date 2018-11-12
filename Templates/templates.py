@@ -172,7 +172,7 @@ class structure:
 
 if __name__ == '__main__':
 
-    extra = {'trigger':'F'}
+    extra = {'DisplacedJetsTriggerBool':'F'}
     testStruct = structure(model='bdt',nConstit=3,preStr='J',extraDict=extra)
     testStruct.panColNameListGen()
     testStruct.branchLeafStrGen()
@@ -181,7 +181,11 @@ if __name__ == '__main__':
     print testStruct.attrTypeList
     print testStruct.attrNameDic
     
-
+    Lt = []
+    for i in range(testStruct.nConstit):
+        for stri in testStruct.attrTypeList:
+            Lt.append( 'J'+str(i+1)+stri )
+    print Lt
 
 
 
