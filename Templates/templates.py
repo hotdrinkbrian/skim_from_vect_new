@@ -173,7 +173,7 @@ class structure:
 if __name__ == '__main__':
 
     extra = {'DisplacedJetsTriggerBool':'F'}
-    testStruct = structure(model='bdt',nConstit=3,preStr='J',extraDict=extra)
+    testStruct = structure(model='bdt',nConstit=1,preStr='J',extraDict=extra)
     testStruct.panColNameListGen()
     testStruct.branchLeafStrGen()
 

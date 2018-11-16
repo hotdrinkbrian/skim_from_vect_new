@@ -867,38 +867,48 @@ JetType(): pt(-1.), eta(-9.), phi(-9.), mass(-1.), energy(-1.), ptRaw(-1.), ptUn
 
 
 
+
+
+
+
+
+
+
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -912,35 +922,38 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -954,35 +967,38 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -996,35 +1012,38 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1038,35 +1057,38 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1080,35 +1102,38 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1122,35 +1147,38 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1164,35 +1192,38 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1206,35 +1237,38 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1248,35 +1282,38 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1290,35 +1327,38 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1332,35 +1372,38 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1374,35 +1417,38 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1416,35 +1462,38 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1458,35 +1507,38 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1500,35 +1552,38 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1542,35 +1597,38 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1584,35 +1642,38 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1626,35 +1687,38 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1668,35 +1732,38 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1710,35 +1777,39 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1752,35 +1823,39 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1794,35 +1869,39 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1836,35 +1915,39 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1878,35 +1961,39 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1920,35 +2007,39 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -1962,35 +2053,39 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -2004,35 +2099,39 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -2046,35 +2145,39 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -2088,35 +2191,39 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -2130,35 +2237,39 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -2172,35 +2283,39 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 */
@@ -2214,35 +2329,1005 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 /*
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
+
+};
+*/
+
+
+
+
+
+
+
+/*
+struct JetTypeSmall {
+JetTypeSmall():
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
+{}
+    float J1pt;
+    float J1eta;
+    float J1phi;
+    float J1mass;
+    float J1energy;
+    float J1cHadE;
+    float J1nHadE;
+    float J1cHadEFrac;
+    float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
+    float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
+    float J1DisplacedJetsTriggerBool;
 
 };
 */
@@ -2254,35 +3339,39 @@ J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(
 
 struct JetTypeSmall {
 JetTypeSmall():
-J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1cMulti(-1.0), J1DisplacedJetsTriggerBool(-1.0), J2pt(-1.0), J2eta(-1.0), J2phi(-1.0), J2mass(-1.0), J2energy(-1.0), J2cHadEFrac(-1.0), J2nHadEFrac(-1.0), J2cMulti(-1.0), J2DisplacedJetsTriggerBool(-1.0), J3pt(-1.0), J3eta(-1.0), J3phi(-1.0), J3mass(-1.0), J3energy(-1.0), J3cHadEFrac(-1.0), J3nHadEFrac(-1.0), J3cMulti(-1.0), J3DisplacedJetsTriggerBool(-1.0)
+J1pt(-1.0), J1eta(-1.0), J1phi(-1.0), J1mass(-1.0), J1energy(-1.0), J1cHadE(-1.0), J1nHadE(-1.0), J1cHadEFrac(-1.0), J1nHadEFrac(-1.0), J1nEmE(-1.0), J1nEmEFrac(-1.0), J1cEmE(-1.0), J1cEmEFrac(-1.0), J1cmuE(-1.0), J1cmuEFrac(-1.0), J1muE(-1.0), J1muEFrac(-1.0), J1eleE(-1.0), J1eleEFrac(-1.0), J1eleMulti(-1.0), J1photonE(-1.0), J1photonEFrac(-1.0), J1photonMulti(-1.0), J1cHadMulti(-1.0), J1nHadMulti(-1.0), J1npr(-1.0), J1cMulti(-1.0), J1nMulti(-1.0), J1ecalE(-1.0), J1nSelectedTracks(-1.0), J1DisplacedJetsTriggerBool(-1.0)
 {}
     float J1pt;
     float J1eta;
     float J1phi;
     float J1mass;
     float J1energy;
+    float J1cHadE;
+    float J1nHadE;
     float J1cHadEFrac;
     float J1nHadEFrac;
+    float J1nEmE;
+    float J1nEmEFrac;
+    float J1cEmE;
+    float J1cEmEFrac;
+    float J1cmuE;
+    float J1cmuEFrac;
+    float J1muE;
+    float J1muEFrac;
+    float J1eleE;
+    float J1eleEFrac;
+    float J1eleMulti;
+    float J1photonE;
+    float J1photonEFrac;
+    float J1photonMulti;
+    float J1cHadMulti;
+    float J1nHadMulti;
+    float J1npr;
     float J1cMulti;
+    float J1nMulti;
+    float J1ecalE;
+    float J1nSelectedTracks;
     float J1DisplacedJetsTriggerBool;
-    float J2pt;
-    float J2eta;
-    float J2phi;
-    float J2mass;
-    float J2energy;
-    float J2cHadEFrac;
-    float J2nHadEFrac;
-    float J2cMulti;
-    float J2DisplacedJetsTriggerBool;
-    float J3pt;
-    float J3eta;
-    float J3phi;
-    float J3mass;
-    float J3energy;
-    float J3cHadEFrac;
-    float J3nHadEFrac;
-    float J3cMulti;
-    float J3DisplacedJetsTriggerBool;
 
 };
 

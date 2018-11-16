@@ -44,8 +44,7 @@ HT          = '50'
 lola_on     = 0 # 1: prepared for lola
 ct_dep      = 0 #1 for ct dependence comparison
 cut_on      = 1#1
-life_time   = [] #['0','0p1','0p05','1','5','10','25','50','100','500','1000','2000','5000','10000']
-sgn_ct      = '500'
+life_time   = ['500'] #['0','0p1','0p05','1','5','10','25','50','100','500','1000','2000','5000','10000']
 treeName    = 'tree44'
 JetName     = 'Jet1s'
 fn          = ''
@@ -58,14 +57,12 @@ pars.add_argument('--ht'    ,action='store',type=int,help='specify HT of the QCD
 pars.add_argument('-s'      ,action='store',type=int,help='specify if for VBF file')
 pars.add_argument('--model' ,action='store',type=str,help='specify model')
 pars.add_argument('-t'      ,action='store',type=int,help='specify if to do test')
-pars.add_argument('--ct'  ,action='store',type=int,help='specify signal life time')
 pars.add_argument('--mass'  ,action='store',type=int,help='specify signal mass')
 pars.add_argument('--nj'    ,action='store',type=int,help='specify number of jets')
 args = pars.parse_args()
 if args.ht  :    HT = str( args.ht ) 
 if args.s   :    ct_dep = args.s
 if args.t   :    testOn = 1
-if args.ct  :    sgn_ct      = args.ct
 if args.mass:    sgn_mass    = args.mass
 if args.nj  :    num_of_jets = args.nj
 
@@ -77,8 +74,6 @@ elif args.model == 'lola5':
 elif args.model == 'lola6':
     lola_on    = 1
     NumOfVecEl = 6
-
-life_time.append( str(sgn_ct) )
 
 
 forBDT    = structure(model='bdt' , nConstit=num_of_jets, preStr='J'          )
@@ -261,8 +256,19 @@ if lola_on == 1:
 #                       #
 #########################
 
+#=====================================================================================================
+os.chdir(path_out)
+#if not os.path.isdir('Skim'): os.mkdir('Skim')
+#=====================================================================================================
+#-----------===============================
+for cc in channel:
+   nFn = channel[cc].replace('.root','_' + str(num_of_jets) + 'j_skimed.root') 
+   ss  = path + channel[cc]    
+name        = ss
+newFileName = nFn
+#-----------===============================
 #-----------------------------------------------------------------------------------------------------------
-def skim_c( name , newFileName ):
+if 1:
     oldFile                   = TFile(name, "READ")
     oldTree                   = oldFile.Get("ntuple/tree") 
     NofEntries                = oldTree.GetEntriesFast()
@@ -285,20 +291,20 @@ def skim_c( name , newFileName ):
         
     attr     = forBDT.preList + forBDT.attrTypeList
     attr_out = forLola.attrTypeList
-    startTemp=0   
+    #startTemp=0   
     #theweight = oldTree.GetWeight() 
     
-    #def FillTrees(i):
-    for i in xrange(0, numOfEntriesToScan_local):    
-        start     = showTimeLeft(ii=i,mode='s',startTime=startTemp)
-        startTemp = start
+    def FillTrees(i):
+    #for i in xrange(0, numOfEntriesToScan_local):    
+        #start     = showTimeLeft(ii=i,mode='s',startTime=startTemp)
+        #startTemp = start
 
         oldTree.GetEntry(i)
         # selections
         # Trigger
        
-        if DisplacedJets_Trigger:
-            if not eval( DisplacedJets_Trigger_str ): continue
+        #if DisplacedJets_Trigger:
+        #    if not eval( DisplacedJets_Trigger_str ): continue
         #####################################  
         DisplacedJetsTriggerBool = -1.
         if eval( DisplacedJets_Trigger_str ): DisplacedJetsTriggerBool = 1.
@@ -343,13 +349,13 @@ def skim_c( name , newFileName ):
             newTree.Fill()
 
          
-        showTimeLeft(ii=i,mode='e',startTime=start,numOfJobs=numOfEntriesToScan_local)  
+        #showTimeLeft(ii=i,mode='e',startTime=start,numOfJobs=numOfEntriesToScan_local)  
 
 
     
     #set up parallel pool
-    #pool = mp.Pool(processes=80)
-    #pool.map(FillTrees, xrange(0, numOfEntriesToScan_local))
+    pool = mp.Pool(processes=80)
+    pool.map(FillTrees, xrange(0, numOfEntriesToScan_local))
 
 
     print '\nproduced skimmed file',newFile.GetName(),'\tevents =',newTree.GetEntries(),'\tweight =',newTree.GetWeight()
@@ -358,22 +364,7 @@ def skim_c( name , newFileName ):
     newFile.Close() 
 #-----------------------------------------------------------------------------------------------------------
 
-#-----------===============================
-def skim(names): 
-    for cc in channel:
-        nFn = channel[cc].replace('.root','_' + str(num_of_jets) + 'j_skimed.root')
-        ss = path + channel[cc]    
-        skim_c(ss,nFn)
-        #pi = mp.Process(target=skim_c, args=(ss,nFn))
-        #pi.start()
-#-----------===============================
 
-#=====================================================================================================
-os.chdir(path_out)
-#if not os.path.isdir('Skim'): os.mkdir('Skim')
-p = mp.Process(target=skim, args=(fn,))
-p.start()
-#=====================================================================================================
 
 
 

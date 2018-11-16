@@ -3,7 +3,9 @@
 #attrList = ['cHadE','nHadE','cHadEFrac','nHadEFrac','nEmE','nEmEFrac','cEmE','cEmEFrac','cmuE','cmuEFrac','muE','muEFrac','eleE','eleEFrac','eleMulti','photonE','photonEFrac','photonMulti','cHadMulti','nHadMulti','npr','cMulti','nMulti','FracCal']
 
 #attrList = ['cHadEFrac','nHadEFrac','nEmEFrac','cEmEFrac','cmuEFrac','muEFrac','eleEFrac','eleMulti','photonEFrac','photonMulti','cHadMulti','nHadMulti','npr','cMulti','nMulti']
-attrList = ['cHadEFrac','nHadEFrac','cMulti']
+#attrList = ['cHadEFrac','nHadEFrac','cMulti']
+attrList = ['cHadE','nHadE','cHadEFrac','nHadEFrac','nEmE','nEmEFrac','cEmE','cEmEFrac','cmuE','cmuEFrac','muE','muEFrac','eleE','eleEFrac','eleMulti','photonE','photonEFrac','photonMulti','cHadMulti','nHadMulti','npr','cMulti','nMulti','ecalE','nSelectedTracks']
+
 
 #extraDic = {}
 extraDic = {
