@@ -1,6 +1,6 @@
 import os
 
-ctauL = [100,500,1000,2000,5000]
+ctauL = [500,1000,2000,5000]
 massL = [x for x in range(15,65,5)]
 print ctauL
 print massL
@@ -10,7 +10,12 @@ sgnOnStr    = ' -s 1 '
 massCommStr = ' --mass '
 ctauCommStr = ' --ct '
 
+mm          = 40
 
-#for i in massL:    os.system( runCommStr + sgnOnStr + massCommStr + str(i) )
-for i in ctauL:    os.system( runCommStr + sgnOnStr + massCommStr + '40' + ctauCommStr + str(i) )
+#for i in ctauL:    os.system( runCommStr + sgnOnStr + massCommStr + str(mm) + ctauCommStr + str(i) )
 
+
+for i in ctauL:    
+    for j in massL:
+
+        os.system( runCommStr + sgnOnStr + massCommStr + str(j) + ctauCommStr + str(i) )

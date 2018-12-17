@@ -6,10 +6,7 @@ import copy
 import math
 import argparse
 from array import array
-from time import time as tm
-import root_numpy     as rnp
-import numpy          as np
-import pandas         as pd
+import pandas as pd
 from tools import ptrank, padd, showTimeLeft
 from templates import *
 from ROOT import ROOT, gROOT, TDirectory, TFile, gFile, TBranch, TLeaf, TTree
@@ -21,27 +18,33 @@ gROOT.ProcessLine(pl)
 from ROOT import JetType, JetTypeSmall, JetTypePFC_fourVect, JetTypePFC_fiveVect, JetTypePFC_sixVect
 Js = JetType()
 
+from time import time as tm
+import root_numpy     as rnp
+import numpy          as np
 
 
 #################
 # settings      #
 #################
-path               = '/beegfs/desy/user/hezhiyua/backed/fromLisa/fromBrianLLP/'
 #path               = '/beegfs/desy/user/hezhiyua/backed/fromLisa/fromLisaLLP//'
-#path              = '/beegfs/desy/user/hezhiyua/backed/dustData/'+'crab_folder_v2/'#'/home/brian/datas/roottest/'
-num_of_jets           = 1#3#4
+path              = '/beegfs/desy/user/hezhiyua/backed/dustData/'+'crab_folder_v2/'#'/home/brian/datas/roottest/'
+inName            = 'VBFH_HToSSTobbbb_MH-125_MS-40_ctauS-500_jetOnly.root'
+num_of_jets           = 1#3#1#4
 testOn                = 0
 nonLeadingJetsOn      = 0#1
-nLimit                = 10000000000000
+nLimit                = 1000000000000#100000#1000000
 numOfEntriesToScan    = 100 #only when testOn = 1
+NumOfVecEl            = 6
 Npfc                  = 40
-# <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< adjusted for different oldfile location
+#scanDepth            = 44
+vectName              = 'MatchedCHSJet1' #'Jets'
+#adjusted for different oldfile location
 path_out    = '/beegfs/desy/user/hezhiyua/2bBacked/skimmed/skim_output/'
 versionN_b  = 'TuneCUETP8M1_13TeV-madgraphMLM-pythia8-v1'
 versionN_s  = 'TuneCUETP8M1_13TeV-powheg-pythia8_PRIVATE-MC'
 HT          = '50'
 lola_on     = 0 # 1: prepared for lola
-ct_dep      = 0 # 1: for ct dependence comparison
+ct_dep      = 0 #1 for ct dependence comparison
 cut_on      = 1
 life_time   = [] 
 sgn_ct      = '500'
@@ -79,21 +82,19 @@ elif args.model == 'lola6':
 
 life_time.append( str(sgn_ct) )
 
-if lola_on:
-    forLola   = structure(model='lola', nConstit=Npfc       , dimOfVect=NumOfVecEl)
-    forLola.Objh()
-else      :
-    forBDT    = structure(model='bdt' , nConstit=1          , preStr='J'          ) # nConstit=num_of_jets
-    forBDT.Objh()
 
+forBDT    = structure(model='bdt' , nConstit=num_of_jets, preStr='J'          )
+forLola   = structure(model='lola', nConstit=40         , dimOfVect=NumOfVecEl)
+forBDT.Objh()
+forLola.Objh()
 
 
 if   ct_dep == 0:
     matchOn = 0
-    if   '50'  == HT: channel = {'QCD':'QCD_HT50to100_'  + versionN_b + '.root'}
-    elif '100' == HT: channel = {'QCD':'QCD_HT100to200_' + versionN_b + '.root'}
-    elif '200' == HT: channel = {'QCD':'QCD_HT200to300_' + versionN_b + '.root'}
-    elif '300' == HT: channel = {'QCD':'QCD_HT300to500_' + versionN_b + '.root'}
+    if   '50'   == HT: channel = {'QCD':'QCD_HT50to100_'    + versionN_b + '.root'}
+    elif '100'  == HT: channel = {'QCD':'QCD_HT100to200_'   + versionN_b + '.root'}
+    elif '200'  == HT: channel = {'QCD':'QCD_HT200to300_'   + versionN_b + '.root'}
+    elif '300'  == HT: channel = {'QCD':'QCD_HT300to500_'   + versionN_b + '.root'}
     elif '500'  == HT: channel = {'QCD':'QCD_HT500to700_'   + versionN_b + '.root'}
     elif '700'  == HT: channel = {'QCD':'QCD_HT700to1000_'  + versionN_b + '.root'}
     elif '1000' == HT: channel = {'QCD':'QCD_HT1000to1500_' + versionN_b + '.root'}
@@ -109,8 +110,10 @@ elif ct_dep == 1:
 if   lola_on == 0:
     Jets1 = JetTypeSmall() #for bdt: JetTypeSmall; for lola: JetTypePFC_fourVect
 elif lola_on == 1:
-    if   NumOfVecEl == 5:    Jets1 = JetTypePFC_fiveVect() 
-    elif NumOfVecEl == 6:    Jets1 = JetTypePFC_sixVect()
+    if   NumOfVecEl == 5:
+        Jets1 = JetTypePFC_fiveVect() 
+    elif NumOfVecEl == 6:
+        Jets1 = JetTypePFC_sixVect()
 
 #-------------------------------------
 cs            = {}
@@ -119,7 +122,7 @@ cs['eta_L']   = 'eta' + '>' + '-2.4'
 cs['eta_U']   = 'eta' + '<' + '2.4'
 cs['matched'] = 'isGenMatched' + '==' + '1'
 #-------------------------------------
-#-------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------------------
 #prs = 'Jet_old_dict[' +str(j+1) + '].'
 prs = 'oldTree.Jets[k].' 
 a   = ' and '
@@ -135,21 +138,20 @@ if matchOn == 1:
                     '(' + prs + cs['matched']  + ')'
 if   cut_on == 1: print '\nCuts:\n',condition_str
 elif cut_on == 0: print 'no cut applied~'
-#-------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------------------
 #######################################
-if   nonLeadingJetsOn == 0:    whichJetStr = 'k==0' # >>>>>>>>>>>>>>>>>>>>> 0 or 1????
-elif nonLeadingJetsOn == 1:    whichJetStr = 'k>=0'
+if   nonLeadingJetsOn == 0:    whichJetStr = 'k==1' # k==0????
+elif nonLeadingJetsOn == 1:    whichJetStr = 'k>=1' # k>=0????
 #######################################
-#DisplacedJets_Trigger_str = 'oldTree.HLT_VBF_DisplacedJet40_DisplacedTrack_v or oldTree.HLT_VBF_DisplacedJet40_DisplacedTrack_2TrackIP2DSig5_v or oldTree.HLT_HT350_DisplacedDijet40_DisplacedTrack_v or oldTree.HLT_HT350_DisplacedDijet80_DisplacedTrack_v or oldTree.HLT_VBF_DisplacedJet40_VTightID_DisplacedTrack_v or oldTree.HLT_VBF_DisplacedJet40_VVTightID_DisplacedTrack_v or oldTree.HLT_HT350_DisplacedDijet80_Tight_DisplacedTrack_v or oldTree.HLT_VBF_DisplacedJet40_VTightID_Hadronic_v or oldTree.HLT_VBF_DisplacedJet40_VVTightID_Hadronic_v or oldTree.HLT_HT650_DisplacedDijet80_Inclusive_v or oldTree.HLT_HT750_DisplacedDijet80_Inclusive_v'
-#######################################
+
 
 
 
 
 tA = tm()
 if lola_on == 1:
-    inName = [ channel[i] for i in channel ][0]
-    print inName
+    inName = channel['ct500']#channel['QCD']#''#[for i in channel: channel[i]][0]
+
     j1Entry  = []
     j1Num    = []
     pan      = []
@@ -196,47 +198,40 @@ if lola_on == 1:
         order   = []
         ord_dic = {}
         for i in xrange(n_col):
-            if x[i] <= Npfc:    ord_dic[x[i]] = i
+            if x[i] <= 40:    ord_dic[x[i]] = i
         cc = 1
         for key, item in ord_dic.iteritems():
-            if cc == key:    order.append(item)
+            if cc == key:    order.append(item) 
             cc += 1
         leng = len(order)
-        if leng < Npfc:    order = order + (Npfc-leng)*[-1]
+        if leng < 40:    order = order + (40-leng)*[-1]
         return order
-
+   
     def pick_top(x, default_val):
         order   = []
-        for i in xrange(Npfc):
-            i_col = x['o'+str(i)]
+        for i in xrange(40):
+            i_col = x['o'+str(i)] 
             if pd.isnull(i_col):    break
-            elif i_col == -1   :    order.append(default_val)
+            elif i_col == -1   :    order.append(default_val) 
             else               :    order.append( x[i_col] )
-        return order
+        return order 
 
-    n_col            = pt_rank.shape[1]
+    n_col            = pt_rank.shape[1] 
     order_pt         = pt_rank.apply(lambda row: ordering(row, n_col), axis=1)
     order_df         = pd.DataFrame.from_records( order_pt.values.tolist() )
-    order_df.columns = [ 'o'+str(i) for i in range(Npfc) ]
+    order_df.columns = [ 'o'+str(i) for i in range(40) ]
     df_ord           = {}
     pan_list         = []
     attr_list        = ['energy','px','py','pz','c','pdgId','pt'] # pt not needed here
-
+    
     for a in attr_list[:NumOfVecEl]: # to be checked!!!
-        if   a == 'c'    :
-            def_val = -1
-            df_typ  = int
-        elif a == 'pdgId':
-            def_val = -1
-            df_typ  = int
-        else             :
-            def_val = 0
-            df_typ  = float
+        if   a == 'c'    :    def_val = -1
+        elif a == 'pdgId':    def_val = -1 
+        else             :    def_val = 0
         tmp_df_ord   = pd.concat( [df_dict[a].copy(), order_df.copy()], axis=1)
         df_ord_list  = tmp_df_ord.apply(lambda row: pick_top(row, def_val), axis=1)
         df_ord[a]    = pd.DataFrame.from_records( df_ord_list.values.tolist() )
-        tmp_df_ord   = df_ord[a].astype(df_typ)
-        pan_list.append(tmp_df_ord)
+        pan_list.append(df_ord[a])
     #print df_ord['pt'][:8]
     pan         = pd.concat(pan_list, axis=1)
     forLola.panColNameListGen()
@@ -245,6 +240,7 @@ if lola_on == 1:
     print pan[:8]
 tB = tm()
 print 'Time: ', str(tB-tA), 'sec'
+exit()
 
 
 
@@ -280,8 +276,8 @@ def skim_c( name , newFileName ):
         newTree.Branch( JetName, Jets1, forLola.branchLeafStr )
     # this attribute list must exactly match (the order of) the features in the header file!!!! 
         
-    if not lola_on:    attr     = forBDT.preList + forBDT.attrTypeList
-    else          :    attr_out = forLola.attrTypeList
+    attr     = forBDT.preList + forBDT.attrTypeList
+    attr_out = forLola.attrTypeList
     startTemp=0   
     #theweight = oldTree.GetWeight() 
     
@@ -299,26 +295,21 @@ def skim_c( name , newFileName ):
 
                 if num_of_jets == 1:
                     if not eval(whichJetStr)        : continue
-                else               :
-                    if not (k>=0 and k<num_of_jets): continue 
+                else               :  
+                    if not (k>=1 and k<=num_of_jets): continue 
                 
                 if cut_on == 1:                       
-                    if not eval( condition_str ): continue
-                    """
+                    if not eval( condition_str ): 
                         for stri in attr:
-                            strTemp = 'J'+str(k+1)+''+stri 
-                            #strTemp = 'J1'+stri
+                            strTemp = 'J'+str(k)+''+stri 
                             if   stri == 'eta' or stri == 'phi': dfv = -9.    
                             else                               : dfv = -1.  
                             setattr( Jets1, strTemp , dfv ) 
                         continue    
-                    """
                     
                 passB = 1 
                 for stri in attr:
-                    #strTemp      = 'J'+str(k+1)+''+stri 
-                    strTemp      = 'J1'+stri 
-                    fillingValue = getattr(oldTree.Jets[k], stri) 
+                    strTemp = 'J'+str(k)+''+stri 
                     setattr( Jets1 , strTemp , fillingValue )                
             if passB == 1:
                 newTree.Fill()    
@@ -329,7 +320,7 @@ def skim_c( name , newFileName ):
                 for strO in attr_out:
                     tempAttrStrO = 'pfc' + str(ii+1) + '_' + strO
                     tempAttrStrI =  forLola.attrNameDic[strO] + '_' + str(ii+1)
-                    setattr( Jets1 , tempAttrStrO , pan[tempAttrStrI][i] )
+                    setattr( Jets1 , tempAttrStrO , jet1[tempAttrStrI][i] )
             #!!!!!!!!!!!!!!!!!!!!deal with the empty value situation!!!!!!!!!!!!!!!!!!!!!!
             newTree.Fill()
 
@@ -419,112 +410,3 @@ for jentry in xrange(entries):
         print tin.Jets[j].pt
 ###################################################################################################################
 """
-
-
-"""
-
-if lola_on == 1:
-    inName = channel['ct500']#channel['QCD']#''#[for i in channel: channel[i]][0]
-
-    j1Entry  = []
-    j1Num    = [] 
-    pan      = []
-
-    f1 = TFile( path + inName , "r" )
-    t1 = f1.Get('ntuple/tree')
-
-    NumE = t1.GetEntriesFast()
-    print '\nEntries: ', NumE
-    t1.SetBranchAddress( vectName , AddressOf(Js, 'pt') )
-
-    b1 = t1.GetBranch('PFCandidates')
-    nEntries = b1.GetEntries()
-
-    if testOn == 0: 
-        numOfEntriesToScan = nEntries
-        if nEntries > 1000000:        numOfEntriesToScan = 1000000 
-
-    nr = 0
-    for entry in t1:
-        print '~~~~~~~~~~another entry:' + str(nr)
-        b1.GetEntry(nr)
-        nr += 1
-        #print 'chf:'
-        #print Js.chf
-        E         = b1.FindBranch('PFCandidates.energy')
-        PX        = b1.FindBranch('PFCandidates.px')
-        PY        = b1.FindBranch('PFCandidates.py')
-        PZ        = b1.FindBranch('PFCandidates.pz')
-        C         = b1.FindBranch('PFCandidates.isTrack')
-        PID       = b1.FindBranch('PFCandidates.pdgId') #pType
-        #M        = b1.FindBranch('PFCandidates.mass')
-        jetInd    = b1.FindBranch('PFCandidates.jetIndex')
-        j1E       = [] 
-        j1PX      = []
-        j1PY      = []
-        j1PZ      = []
-        j1C       = []
-        j1PID     = []
-        j1M       = [] 
-        scanDepth = E.GetNdata()
-
-        for num in xrange(0,scanDepth):
-            if jetInd.GetValue(num,1) == 0:  #0,1
-                j1Entry.append(nr) 
-                #j1Num.append(num)
-                j1E.append(E.GetValue(num,1))
-                j1PX.append(PX.GetValue(num,1))
-                j1PY.append(PY.GetValue(num,1))
-                j1PZ.append(PZ.GetValue(num,1))
-                j1C.append( int(C.GetValue(num,1)) ) 
-                #print C.GetValue(num,1)
-                #print E.GetValue(num,1)
-                j1PID.append( int(PID.GetValue(num,1)) )
-                #j1M.append(M.GetValue(num,1))
-            #if num == 40:
-            #    break 
-        tempE  , _, _ = ptrank( j1PX, j1PY, j1E   , n_pfc=Npfc)
-        tempPX , _, _ = ptrank( j1PX, j1PY, j1PX  , n_pfc=Npfc)
-        tempPY , _, _ = ptrank( j1PX, j1PY, j1PY  , n_pfc=Npfc)
-        tempPZ , _, _ = ptrank( j1PX, j1PY, j1PZ  , n_pfc=Npfc)
-        tempC  , _, _ = ptrank( j1PX, j1PY, j1C   , n_pfc=Npfc) 
-        tempPID, _, _ = ptrank( j1PX, j1PY, j1PID , n_pfc=Npfc)
-        #tempM, _, _ = ptrank( j1PX, j1PY, j1M , n_pfc=Npfc)
-        #print tempN
-        #print tempPT
-        tE   = padd(tempE  ,  0, Npfc)
-        tPX  = padd(tempPX ,  0, Npfc)    
-        tPY  = padd(tempPY ,  0, Npfc)
-        tPZ  = padd(tempPZ ,  0, Npfc)
-        tC   = padd(tempC  , -1, Npfc)
-        tPID = padd(tempPID, -1, Npfc)
-        #tM  = padd(tempM , 0, Npfc)
-    
-        if NumOfVecEl == 5:
-            tt = [4444]*40*5
-            tt[40*0:40*1] = tE 
-            tt[40*1:40*2] = tPX 
-            tt[40*2:40*3] = tPY  
-            tt[40*3:40*4] = tPZ 
-            tt[40*4:40*5] = tC 
-        elif NumOfVecEl == 6:
-            tt = [4444]*40*6
-            tt[40*0:40*1] = tE 
-            tt[40*1:40*2] = tPX 
-            tt[40*2:40*3] = tPY  
-            tt[40*3:40*4] = tPZ 
-            tt[40*4:40*5] = tC 
-            tt[40*5:40*6] = tPID 
-
-        pan.append(tt)
-        
-        if nr == numOfEntriesToScan: break     
-
-    print 'num of entries: ' + str(nEntries)   
-    forLola.panColNameListGen()
-    colN = forLola.panColNameList
-
-    jet1 = pd.DataFrame(pan, columns=colN)  
-"""
-
-
