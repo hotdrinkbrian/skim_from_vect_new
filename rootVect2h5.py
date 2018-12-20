@@ -38,7 +38,8 @@ Npfc                  = 40
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< adjusted for different oldfile location
 path_out    = '/beegfs/desy/user/hezhiyua/2bBacked/skimmed/skim_output/'
 versionN_b  = 'TuneCUETP8M1_13TeV-madgraphMLM-pythia8-v1'
-versionN_s  = 'TuneCUETP8M1_13TeV-powheg-pythia8_PRIVATE-MC'
+#versionN_s  = 'TuneCUETP8M1_13TeV-powheg-pythia8_PRIVATE-MC'
+versionN_s  = 'TuneCUETP8M1_13TeV-powheg-pythia8_Tranche2_PRIVATE-MC'
 HT          = '50'
 lola_on     = 0 # 1: prepared for lola
 ct_dep      = 0 # 1: for ct dependence comparison
@@ -157,7 +158,7 @@ if lola_on == 1:
     tin      = f1.Get('ntuple/tree')
     NumE     = tin.GetEntriesFast()
     print '\nEntries: ', NumE
-    s_cut         = 1000#None#100
+    s_cut         = None#1000#None#100
     arr_energy    = rnp.tree2array(tin, ['PFCandidates.energy']  , stop=s_cut)
     arr_px        = rnp.tree2array(tin, ['PFCandidates.px']      , stop=s_cut)
     arr_py        = rnp.tree2array(tin, ['PFCandidates.py']      , stop=s_cut)
@@ -286,14 +287,17 @@ def skim_c( name , newFileName ):
     #theweight = oldTree.GetWeight() 
     
     #def FillTrees(i):
-    for i in xrange(0, numOfEntriesToScan_local):    
-        start     = showTimeLeft(ii=i,mode='s',startTime=startTemp)
-        startTemp = start
 
-        oldTree.GetEntry(i)
-        # selections
+    if lola_on == 0:    
+
+        for i in xrange(0, numOfEntriesToScan_local):    
+            start     = showTimeLeft(ii=i,mode='s',startTime=startTemp)
+            startTemp = start
+
+            oldTree.GetEntry(i)
+            # selections
       
-        if lola_on == 0:      
+        #if lola_on == 0:      
             passB = 0
             for k in xrange( oldTree.Jets.size() ):
 
@@ -322,9 +326,17 @@ def skim_c( name , newFileName ):
                     setattr( Jets1 , strTemp , fillingValue )                
             if passB == 1:
                 newTree.Fill()    
+         
+            showTimeLeft(ii=i,mode='e',startTime=start,numOfJobs=numOfEntriesToScan_local)  
 
-                    
-        elif lola_on == 1:
+
+    elif lola_on == 1:
+        loop_depth = pan.shape[0]
+        print '>>>>>>>>>>>>>>>>>>>>> # out events: ', loop_depth  
+        for i in xrange(0, loop_depth):
+            start     = showTimeLeft(ii=i,mode='s',startTime=startTemp)
+            startTemp = start
+
             for ii in xrange(forLola.nConstit):
                 for strO in attr_out:
                     tempAttrStrO = 'pfc' + str(ii+1) + '_' + strO
@@ -332,9 +344,12 @@ def skim_c( name , newFileName ):
                     setattr( Jets1 , tempAttrStrO , pan[tempAttrStrI][i] )
             #!!!!!!!!!!!!!!!!!!!!deal with the empty value situation!!!!!!!!!!!!!!!!!!!!!!
             newTree.Fill()
+              
+            showTimeLeft(ii=i,mode='e',startTime=start,numOfJobs=numOfEntriesToScan_local)
 
-         
-        showTimeLeft(ii=i,mode='e',startTime=start,numOfJobs=numOfEntriesToScan_local)  
+
+
+
 
 
     
