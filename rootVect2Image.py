@@ -34,7 +34,7 @@ testOn                = 0
 nonLeadingJetsOn      = 0#1
 nLimit                = 10000000000000
 numOfEntriesToScan    = 100 #only when testOn = 1
-Npfc                  = 400#40
+Npfc                  = 400#44#88#400#40
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< adjusted for different oldfile location
 #path_out    = '/beegfs/desy/user/hezhiyua/2bBacked/skimmed/skim_output/'
 #path_out    = '/beegfs/desy/user/hezhiyua/2bBacked/skimmed/Skim/fromBrian_forBDT/' 
@@ -183,6 +183,10 @@ def run_i(inName):
     arr_pdgId     = rnp.tree2array(tin, ['PFCandidates.pdgId']   , stop=s_cut)
     arr_jetInd    = rnp.tree2array(tin, ['PFCandidates.jetIndex'], stop=s_cut)
 
+    arr_chf       = rnp.tree2array(tin, ['Jets[0].cHadEFrac'] , stop=s_cut)
+    #print '<<<<<< test: '
+    #print arr_chf
+
     f1.Close()
 
     e_df          = pd.DataFrame(arr_energy)
@@ -192,6 +196,9 @@ def run_i(inName):
     c_df          = pd.DataFrame(arr_c)
     pdgId_df      = pd.DataFrame(arr_pdgId)
     jetInd_df     = pd.DataFrame(arr_jetInd)
+
+    chf_df        = pd.DataFrame(arr_chf)
+
     df            = pd.DataFrame()
     df['energy']  = e_df
     df['px']      = px_df
@@ -211,6 +218,13 @@ def run_i(inName):
     df_dict['pt'] = df_dict['ppt'].pow(1./2)
     df_pt_rank    = df_dict['pt'].rank(axis=1, ascending=False)
     pt_rank       = df_pt_rank.copy()
+
+    #print chf_df
+    df['chf']     = chf_df 
+    df['chf']     = df['chf'].apply(lambda x: x[0])
+    print '>>>>>>>>>>>> test:'
+    print df['chf']
+
 
     def ordering(x, n_col):
         order   = []
@@ -264,6 +278,52 @@ def run_i(inName):
     pan.columns = colN
     print pan[:8]
     print 'Events: ', len(pan[:])
+
+    
+    def pick_ch(df):
+        if (df != 211) & (df != -211) & (df != 130):
+            return 0#-1
+        elif (df == 211) | (df == -211):
+            return 1
+        elif (df == 130): 
+            return 0
+
+    def calc_e(row):
+        tot_e = 0
+        for i in range(Npfc):
+            coln_i   = 'E_'+str(i+1)
+            tot_e   += row[coln_i] 
+        return tot_e
+
+    def calc_ce(row):
+        ce = 0
+        for i in range(Npfc):
+            e_i   = 'E_'+str(i+1)   
+            c_i   = 'C_'+str(i+1)
+            ce   += row[e_i] * row[c_i]   
+        return ce
+
+    def calc_che(row):
+        che = 0
+        for i in range(Npfc):
+            e_i    = 'E_'+str(i+1)
+            pid_i  = 'PID_'+str(i+1)
+            ch_i   = row[pid_i]
+            ch_i   = pick_ch(ch_i)
+            che   += row[e_i] * ch_i
+        return che
+
+
+    def calc_chf(row):
+        return row['che'] / float(row['tot_e'])#row['ce'] / float(row['tot_e'])
+
+    pan['tot_e'] = pan.apply(calc_e, axis=1)
+    pan['che']   = pan.apply(calc_che, axis=1)
+    #pan['ce']    = pan.apply(calc_ce, axis=1)
+    pan['CHF']   = pan.apply(calc_chf, axis=1)
+    print pan['CHF']
+
+    #exit() 
     joblib.dump(pan,path_out+'/'+inName[:-5]+'_1j_skimed'+'.pkl')
 
 

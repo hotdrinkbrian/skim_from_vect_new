@@ -7,7 +7,7 @@ import math
 import argparse
 from array import array
 from time import time as tm
-import root_numpy     as rnp
+#import root_numpy     as rnp
 import numpy          as np
 import pandas         as pd
 from tools import ptrank, padd, showTimeLeft
@@ -36,7 +36,9 @@ nLimit                = 10000000000000
 numOfEntriesToScan    = 100 #only when testOn = 1
 Npfc                  = 40
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< adjusted for different oldfile location
-path_out    = '/beegfs/desy/user/hezhiyua/2bBacked/skimmed/skim_output/'
+#path_out    = '/beegfs/desy/user/hezhiyua/2bBacked/skimmed/skim_output/'
+#path_out    = '/beegfs/desy/user/hezhiyua/2bBacked/skimmed/Skim/fromBrian_forBDT/' 
+path_out    = '/beegfs/desy/user/hezhiyua/2bBacked/skimmed/Skim/fromBrian_forLola/large_sgn/'
 versionN_b  = 'TuneCUETP8M1_13TeV-madgraphMLM-pythia8-v1'
 #versionN_s  = 'TuneCUETP8M1_13TeV-powheg-pythia8_PRIVATE-MC'
 versionN_s  = 'TuneCUETP8M1_13TeV-powheg-pythia8_Tranche2_PRIVATE-MC'
@@ -149,6 +151,8 @@ elif nonLeadingJetsOn == 1:    whichJetStr = 'k>=0'
 
 tA = tm()
 if lola_on == 1:
+    import root_numpy     as rnp
+
     inName = [ channel[i] for i in channel ][0]
     print inName
     j1Entry  = []
@@ -209,7 +213,7 @@ if lola_on == 1:
     def pick_top(x, default_val):
         order   = []
         for i in xrange(Npfc):
-            i_col = x['o'+str(i)]
+            i_col = int( x['o'+str(i)] )
             if pd.isnull(i_col):    break
             elif i_col == -1   :    order.append(default_val)
             else               :    order.append( x[i_col] )
@@ -276,11 +280,12 @@ def skim_c( name , newFileName ):
     if   lola_on == 0:
         forBDT.branchLeafStrGen()
         newTree.Branch( JetName, Jets1, forBDT.branchLeafStr )
+        #newTree.Branch( JetName, Jets1, forBDT.branchLeafStr+':J1isCaloTag/F' )
     elif lola_on == 1:
         forLola.branchLeafStrGen() 
         newTree.Branch( JetName, Jets1, forLola.branchLeafStr )
     # this attribute list must exactly match (the order of) the features in the header file!!!! 
-        
+
     if not lola_on:    attr     = forBDT.preList + forBDT.attrTypeList
     else          :    attr_out = forLola.attrTypeList
     startTemp=0   
@@ -296,7 +301,7 @@ def skim_c( name , newFileName ):
 
             oldTree.GetEntry(i)
             # selections
-      
+    
         #if lola_on == 0:      
             passB = 0
             for k in xrange( oldTree.Jets.size() ):
@@ -322,8 +327,13 @@ def skim_c( name , newFileName ):
                 for stri in attr:
                     #strTemp      = 'J'+str(k+1)+''+stri 
                     strTemp      = 'J1'+stri 
-                    fillingValue = getattr(oldTree.Jets[k], stri) 
-                    setattr( Jets1 , strTemp , fillingValue )                
+                    if stri != 'met': 
+                        fillingValue = getattr(oldTree.Jets[k], stri) 
+                        setattr( Jets1 , strTemp , fillingValue )
+                    else:
+                        fillingValue = oldTree.GetBranch('MEt').GetLeaf('pt').GetValue()
+                        Jets1.J1met = fillingValue    
+
             if passB == 1:
                 newTree.Fill()    
          
